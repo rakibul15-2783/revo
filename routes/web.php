@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,13 @@ use App\Http\Controllers\UserController;
 Route::middleware('islogedin')->group(function () {
     Route::get('/mainpage',[UserController::class,'mainpage']);
 });
+Route::middleware('afterLogin')->group(function(){
+    Route::get('/register',[UserController::class,'register'])->name('register');
+});
 
-
+Route::get('/registersuccess',[UserController::class,'registersuccess'])->name('registersuccess');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
-Route::get('/register',[UserController::class,'register'])->name('register');
+
 Route::get('/login',[UserController::class,'login'])->name('login');
 Route::post('/insesrtuser',[UserController::class,'insert'])->name('insesrtuser');
 Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');

@@ -8,7 +8,9 @@ use App\Models\User;
 use  Illuminate\Support\Facades\Auth;
 use  Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 use Session;
+use Mail;
 
 class UserController extends Controller
 {
@@ -24,16 +26,30 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => [
+                'required',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+            ],
+            'password_confirmation' => 'required|same:password'
         ]);
 
         $user = new User;
         $user->name = $rqst->name;
         $user->email = $rqst->email;
+        $user->username = $rqst->username;
         $user->phone = $rqst->phone;
         $user->password = $rqst->password;
         $user->save();
-        return back();
+        $data = ['name'=>"rakib",'data'=>"hello rakib"];
+        Mail::send('register',$data,function($messege) use ($user){
+            $messege ->to('rakibul15-2783@diu.edu.bd');
+            $messege->subject("Successfully Registered");
+        });
+        return redirect()->route('registersuccess');
 
     }
     public function login(){
@@ -49,7 +65,7 @@ class UserController extends Controller
         $user = User::where('email',$rqst->email)->first();
         if($rqst->password == $user->password){
             $rqst->session()->put('loginId', $user->id);
-            $rqst->session()->put('username', $user->username);
+           // $rqst->session()->put('username', $user->username);
             return redirect()->intended('mainpage');
         }
         
@@ -58,10 +74,16 @@ class UserController extends Controller
     }
 
     public function mainpage(){
-        
+        $data = array();
         if(Session::has('loginId')){
-            return view('mainpage');
+            $data = User::where('id',Session::get('loginId'))->first();
+            return view('mainpage',compact('data'));
         }
+    }
+    public function registersuccess(){
+        
+            return view('registersuccess');
+        
     }
 
     public function logout(){

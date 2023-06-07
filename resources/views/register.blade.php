@@ -37,6 +37,7 @@
                                         </div>
                                         
 									</div>
+
 									<div class="row mb-3">
 										<label for="email" class="col-sm-3 col-form-label">Email</label>
 										<div class="col-sm-9">
@@ -46,10 +47,22 @@
                                             @enderror
 										</div>
 									</div>
+
+									<div class="row mb-3">
+										<label for="username" class=" col-sm-3 col-form-label">Username </label>
+										<div class="col-sm-9">
+											<input type="text" name="username" value="{{ old('username') }}" class="username form-control" id="name" placeholder="Username">
+                                             @error('username')
+                                              <span class="text-danger">{{ $message }}</span>
+                                             @enderror
+                                        </div>
+                                        
+									</div>
+
 									<div class="row mb-3">
 										<label for="phone" class="col-sm-3 col-form-label">Phone</label>
 										<div class="col-sm-9">
-											<input type="tel" name="phone" value="{{ old('phone') }}" class="phone form-control" id="phone" placeholder="Phone Number">
+											<input type="tel" name="phone" pattern="[0-9]{11}" required value="{{ old('phone') }}" class="phone form-control" id="phone" placeholder="11 digit of your phone number">
                                             @error('phone')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror

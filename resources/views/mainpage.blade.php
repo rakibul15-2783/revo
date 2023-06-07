@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome, Shifat! </h1>
+    <h1>Welcome, {{ $data->username }} </h1>
     <a href="{{ route('logout') }}" class="btn btn-info">Logout</a>
     
 </body>
