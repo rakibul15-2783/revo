@@ -49,6 +49,7 @@ class UserController extends Controller
         $user = User::where('email',$rqst->email)->first();
         if($rqst->password == $user->password){
             $rqst->session()->put('loginId', $user->id);
+            $rqst->session()->put('username', $user->username);
             return redirect()->intended('mainpage');
         }
         
