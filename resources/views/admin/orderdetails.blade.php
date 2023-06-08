@@ -16,6 +16,16 @@
 						
 						<div class="card border-top border-0 border-4 border-info">
 							<div class="card-body">
+                            <div class="border p-4 rounded text-center ">
+                                    <a href="{{ route('order') }}" class="btn btn-sm btn-info">Order Now</a>
+                                    <a href="{{ route('seeorder') }}" class="btn btn-sm btn-success">See Order</a>
+                                    <a href="{{ route('logout') }}" class="btn btn-sm btn-danger">Logout</a>
+                                    @if(Auth::user()->role==2)
+                                        <a href="{{ route('orderdetails') }}" class="btn btn-sm btn-warning">Order Details</a>
+                                        <a href="{{ route('userdetails') }}" class="btn btn-sm btn-secondary">User Details</a>
+                                
+                                    @endif
+                                </div>
                             <div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 								<thead>
@@ -73,6 +83,7 @@
 									</tr>
 								</tfoot>
 							</table>
+                            
 							</div>
 						</div>
 					</div>
