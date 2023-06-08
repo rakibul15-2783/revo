@@ -12,19 +12,11 @@
     <?php  ?>
 
 				<div class="row">
-					<div class="col-xl-9 mx-auto">
+					<div class="col-xl-9 mx-auto p-4">
 						
-						<hr/>
-						<div class="card border-top border-0 border-4 border-info">
 							<div class="card-body">
 								<div class="border p-4 rounded">
-									<div class="card-title d-flex align-items-center">
-										<div><i class="bx bxs-user me-1 font-22 text-info"></i>
-										</div>
-										<h5 class="mb-0 text-info">Login</h5>
-									</div>
-							
-                                    
+									
                                     <form action="{{ route('loginpermission') }}" method="POST">
                                        @csrf
 									<div class="row mb-3">
@@ -51,9 +43,10 @@
 									<div class="row">
 										<label class="col-sm-3 col-form-label"></label>
 										<div class="col-sm-9">
-											<button type="submit" name="submit" class="submit btn btn-info px-5">Submit</button>
-											
+											<button type="submit" class=" btn btn-info px-5">Login</button>
+											<a href="{{ route('register') }}" class=" btn btn-info px-5">Register Here</a>
 										</div>
+										
 									</div>
                                     </form>
 								</div>

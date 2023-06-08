@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Auth;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +16,22 @@ use App\Http\Middleware\Auth;
 |
 */
 
+Route::middleware('auth','role')->group(function () {
+    Route::get('/adminmainpage',[AdminController::class,'adminmainpage'])->name('adminmainpage');
+    //rakib
+}); 
 Route::middleware('auth')->group(function () {
     Route::get('/mainpage',[UserController::class,'mainpage'])->name('mainpage');
+    Route::get('/order',[UserController::class,'order'])->name('order');
+    Route::post('/ordersuccess',[UserController::class,'ordersuccess'])->name('ordersuccess');
+    Route::get('/seeorder',[UserController::class,'seeorder'])->name('seeorder');
+    
 });
+
 Route::middleware('guest')->group(function(){
     Route::get('/register',[UserController::class,'register'])->name('register');
     Route::get('/login',[UserController::class,'login'])->name('login');
     Route::post('/insesrtuser',[UserController::class,'insert'])->name('insesrtuser');
-    Route::get('/registersuccess',[UserController::class,'registersuccess'])->name('registersuccess');
     Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');
 });
 

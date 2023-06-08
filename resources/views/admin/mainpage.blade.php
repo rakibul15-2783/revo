@@ -14,6 +14,7 @@
 						<div class="card ">
 							<div class="card-body">
 								<div class="border p-4 rounded text-center ">
+                                    <h1>Admin Dashboard</h1>
                                     <h4>Welcome, {{ Auth::user()->name }}  </h4>
                                     <a href="{{ route('order') }}" class="btn btn-sm btn-info">Order Now</a>
                                     <a href="{{ route('seeorder') }}" class="btn btn-sm btn-success">See Order</a>

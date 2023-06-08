@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -51,7 +52,7 @@ class UserController extends Controller
         //     $messege ->to('rakibul15-2783@diu.edu.bd');
         //     $messege->subject("Successfully Registered");
         // });
-        return redirect()->route('registersuccess');
+        return view('registersuccess');
 
     }
     public function login(){
@@ -81,18 +82,32 @@ class UserController extends Controller
         
             return view('mainpage');
         }
-    
-    public function registersuccess(){
-        
-            return view('registersuccess');
-        
-    }
+   
 
     public function logout(){
         Session::flush();
         Auth::logout();
         return redirect()->route('login');
     }
+
+    public function order(){
+        return view('order');
+    }
+    public function ordersuccess(Request $rqst){
+        $order = new Order;
+        $order->user_id = Auth::user()->id;
+        $order->date = $rqst->date;
+        $order->Item = $rqst->item;
+        $order->save();
+        return view('ordersuccess');
+    }
+
+    public function seeorder(){
+        $user = Auth::user();
+        $orders = $user->orders()->get();
+        return view('seeorder', compact('orders'));
+    }
+    
 
     
 
