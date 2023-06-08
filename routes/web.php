@@ -15,12 +15,14 @@ use App\Http\Middleware\Auth;
 |
 */
 
-Route::middleware('islogedin')->group(function () {
-    Route::get('/mainpage',[UserController::class,'mainpage']);
+Route::middleware('auth')->group(function () {
+    
 });
 Route::middleware('afterLogin')->group(function(){
-    Route::get('/register',[UserController::class,'register'])->name('register');
+    
 });
+Route::get('/register',[UserController::class,'register'])->name('register');
+Route::get('/mainpage',[UserController::class,'mainpage'])->name('mainpage');
 
 Route::get('/registersuccess',[UserController::class,'registersuccess'])->name('registersuccess');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
