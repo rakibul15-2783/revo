@@ -13,7 +13,10 @@ class AdminController extends Controller
         return view('admin.orderdetails');
     }
     public function userdetails(){
-        return view('admin.userdetails');
+
+        $users = User::all();
+
+        return view('admin.userdetails',compact('users'));
     }
     public function goback(){
         return view('notaccess');
