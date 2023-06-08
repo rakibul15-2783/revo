@@ -10,7 +10,8 @@ use App\Models\Order;
 class AdminController extends Controller
 {
     public function orderdetails(){
-        return view('admin.orderdetails');
+        $users = User::with("orders")->get();
+        return view('admin.orderdetails',compact('users'));
     }
     public function userdetails(){
 
