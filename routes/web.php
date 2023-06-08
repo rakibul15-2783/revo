@@ -16,20 +16,22 @@ use App\Http\Middleware\Auth;
 */
 
 Route::middleware('auth')->group(function () {
-    
+    Route::get('/mainpage',[UserController::class,'mainpage'])->name('mainpage');
 });
-Route::middleware('afterLogin')->group(function(){
-    
+Route::middleware('guest')->group(function(){
+    Route::get('/register',[UserController::class,'register'])->name('register');
+    Route::get('/login',[UserController::class,'login'])->name('login');
+    Route::post('/insesrtuser',[UserController::class,'insert'])->name('insesrtuser');
+    Route::get('/registersuccess',[UserController::class,'registersuccess'])->name('registersuccess');
+    Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');
 });
-Route::get('/register',[UserController::class,'register'])->name('register');
-Route::get('/mainpage',[UserController::class,'mainpage'])->name('mainpage');
 
-Route::get('/registersuccess',[UserController::class,'registersuccess'])->name('registersuccess');
+
+
+
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
-Route::get('/login',[UserController::class,'login'])->name('login');
-Route::post('/insesrtuser',[UserController::class,'insert'])->name('insesrtuser');
-Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');
+
 Route::get('/', function () {
     return view('welcome');
 });

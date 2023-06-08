@@ -16,7 +16,7 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Session()->has('loginId')){
+        if(!Session()->has(Auth::user()->id)){
             return redirect('login');
         }
         return $next($request); 

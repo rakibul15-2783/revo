@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
-use Session;
+
 use Mail;
 
 class UserController extends Controller
@@ -42,7 +44,7 @@ class UserController extends Controller
         $user->email = $rqst->email;
         $user->username = $rqst->username;
         $user->phone = $rqst->phone;
-        $user->password = $rqst->password;
+        $user->password = Hash::make($rqst->password);
         $user->save();
         // $data = ['name'=>"rakib",'data'=>"hello rakib"];
         // Mail::send('register',$data,function($messege) use ($user){
@@ -63,14 +65,14 @@ class UserController extends Controller
             'password' => 'required',
         ]);
         $credentials = $rqst->only('email','password');
-        dd($credentials);
+        
 
         if(Auth::attempt($credentials)){
-            dd('kjkjkj');
+            
             return redirect()->intended('mainpage');        
         }
 
-        dd('oioioi');
+        
         return back();
     
     }
@@ -87,10 +89,9 @@ class UserController extends Controller
     }
 
     public function logout(){
-        if(Session::has('loginId')){
-            Session::pull('loginId');
-            return redirect('login');
-        }
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('login');
     }
 
     
