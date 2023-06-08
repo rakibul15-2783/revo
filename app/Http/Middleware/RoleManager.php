@@ -16,12 +16,10 @@ class RoleManager
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user()->role == 'admin'){
-            return view('admin.mainpage');
+        if($request->user()->role == 'user'){
+            return view('notaccess');
         }
-        else{
-            return view('mainpage');
-        }
+        
         return $next($request);
     }
 }

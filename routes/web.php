@@ -16,15 +16,16 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
-Route::middleware('auth','role')->group(function () {
-    Route::get('/adminmainpage',[AdminController::class,'adminmainpage'])->name('adminmainpage');
-    //rakib
+Route::middleware('role')->group(function () {
+    Route::get('/orderdetails',[AdminController::class,'orderdetails'])->name('orderdetails');
+    Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
 }); 
 Route::middleware('auth')->group(function () {
     Route::get('/mainpage',[UserController::class,'mainpage'])->name('mainpage');
     Route::get('/order',[UserController::class,'order'])->name('order');
     Route::post('/ordersuccess',[UserController::class,'ordersuccess'])->name('ordersuccess');
     Route::get('/seeorder',[UserController::class,'seeorder'])->name('seeorder');
+    
     
 });
 
