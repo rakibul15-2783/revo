@@ -42,7 +42,11 @@ Route::middleware('auth','role')->group(function () {
     Route::get('/adminlogout',[AdminController::class,'adminlogout'])->name('adminlogout');
     Route::get('/orderdetails',[AdminController::class,'orderdetails'])->name('orderdetails');
     Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
-
+    //order accept
+    Route::get('/orderaccept/{id}',[AdminController::class,'orderaccept']);
+    //order accept
+    Route::get('/userrolechange/{id}',[AdminController::class,'userrolechange']);
+    
 });
 
 Route::get('/goback',[AdminController::class,'goback'])->name('goback');

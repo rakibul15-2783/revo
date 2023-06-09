@@ -25,7 +25,7 @@
                                         </td>
 										<td>
 											@if($order->action == 1)
-											<a href="" class="btn btn-sm btn-warning">Procession</a>
+											<button value = "{{ $order->id }}" class="btn btn-sm btn-warning btn-order-process">Prosessing</button>
 											@else
 											<a href="" class="btn btn-sm btn-success">Accept</a>
 											@endif		
@@ -42,9 +42,24 @@
                                 
 								</table>
 							</div>
-							
+</div>
+				            <!-- jQuery cdn -->
+								<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>			</div>
+			<!-- jQuery for accept order -->
+			<script>
+				jQuery(document).ready(function(){
+					jQuery(document).on("click",".btn-order-process",function(){
+						var id = jQuery(this).val();
+						jQuery.ajax({
+							url: "orderaccept/" + id,
+							type: "get",
+							success: function(res){
+								alert(res.msg);
+							}
+						})
+					})
+				})
+			</script>				
 						
-
-							
-						
+			
 @endsection
