@@ -31,8 +31,10 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                        <th scope="col">Date</th>
+                                        <th scope="col">Order Time</th>
+                                        <th scope="col">Pick Date</th>
                                         <th scope="col">Order List</th>
+                                        <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,8 +42,16 @@
                                     @foreach($orders as $order)
                                     
                                         <tr>
+                                        <td>{{ $order->created_at }}</td>
                                         <td>{{ $order->date }}</td>
                                         <td>{{ $order->Item }}</td>
+                                        <td>
+                                            @if($order->action == 1)
+                                                <span class="badge text-warning">Processing</span>
+                                            @else
+                                            <span class="badge text-success">Done</span>
+                                            @endif
+                                        </td>
                                         </tr>
                                     @endforeach    
                                     </tbody>

@@ -48,6 +48,7 @@ Route::middleware('auth','role')->group(function () {
 Route::get('/goback',[AdminController::class,'goback'])->name('goback');
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });

@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Session;
 class AdminController extends Controller
 {
     public function orderdetails(){
-        $users = User::with("orders")->get();
-        return view('admin.orderdetails',compact('users'));
+        $orders = Order::all();
+        return view('admin.orderdetails',compact('orders'));
     }
     public function userdetails(){
 

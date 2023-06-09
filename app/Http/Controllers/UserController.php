@@ -23,6 +23,8 @@ class UserController extends Controller
     public function register(){
         return view('register');
     }
+
+    //user registration
     public function insert(Request $rqst){
 
         $rqst->validate([
@@ -47,18 +49,24 @@ class UserController extends Controller
         $user->phone = $rqst->phone;
         $user->password = Hash::make($rqst->password);
         $user->save();
-        // $data = ['name'=>"rakib",'data'=>"hello rakib"];
-        // Mail::send('register',$data,function($messege) use ($user){
-        //     $messege ->to('rakibul15-2783@diu.edu.bd');
-        //     $messege->subject("Successfully Registered");
-        // });
+
+        //registration confirmation email 
+       
+       
+        Mail::send('email',[],function($messege) use ($user){
+            $messege ->to($user->email);
+            $messege->subject("Successfully Registered");
+        });
+
         return view('registersuccess');
 
     }
+    
+         //user login
     public function login(){
         return view('login');
     }
-    
+
     public function loginpermission(Request $rqst)
     {
        $rqst->validate([
@@ -99,7 +107,7 @@ class UserController extends Controller
         $order->date = $rqst->date;
         $order->Item = $rqst->item;
         $order->save();
-        return view('ordersuccess');
+        return redirect()->route('seeorder');
     }
 
     public function seeorder(){
