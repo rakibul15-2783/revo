@@ -23,7 +23,7 @@ class AdminController extends Controller
         return view('admin.userdetails',compact('users'));
     }
     public function goback(){
-        return view('notaccess');
+        return view('goback');
     }
     public function adminprofile(){
         return view('admin.adminprofile');

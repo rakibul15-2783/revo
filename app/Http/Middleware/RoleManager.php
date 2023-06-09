@@ -17,7 +17,7 @@ class RoleManager
     public function handle(Request $request, Closure $next)
     {
         if($request->user()->role == 1){
-            return view('notaccess');
+            return redirect('goback');
         }
         
         return $next($request);

@@ -16,16 +16,13 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
-Route::middleware('role')->group(function () {
-    Route::get('/orderdetails',[AdminController::class,'orderdetails'])->name('orderdetails');
-    Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
-}); 
+//user control
 Route::middleware('auth')->group(function () {
     Route::get('/mainpage',[UserController::class,'mainpage'])->name('mainpage');
     Route::get('/order',[UserController::class,'order'])->name('order');
     Route::post('/ordersuccess',[UserController::class,'ordersuccess'])->name('ordersuccess');
     Route::get('/seeorder',[UserController::class,'seeorder'])->name('seeorder');
-    
+    Route::get('/logout',[UserController::class,'logout'])->name('logout');
     
 });
 
@@ -36,16 +33,19 @@ Route::middleware('guest')->group(function(){
     Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');
     Route::get('/adminlogin',[AdminController::class,'adminlogin'])->name('adminlogin');
     Route::post('/adminloginpost',[AdminController::class,'adminloginpost'])->name('adminloginpost');
+    
 });
 
 //admin controll
 Route::middleware('auth','role')->group(function () {
     Route::get('/adminprofile',[AdminController::class,'adminprofile'])->name('adminprofile');  
     Route::get('/adminlogout',[AdminController::class,'adminlogout'])->name('adminlogout');
+    Route::get('/orderdetails',[AdminController::class,'orderdetails'])->name('orderdetails');
+    Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
 
 });
 
-Route::get('/logout',[UserController::class,'logout'])->name('logout');
+Route::get('/goback',[AdminController::class,'goback'])->name('goback');
 
 
 Route::get('/', function () {

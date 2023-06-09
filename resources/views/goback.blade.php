@@ -16,7 +16,7 @@
 						
 						<div class="card border-top border-0 border-4 border-info">
 							<div class="card-body">
-								<h2>Please Go Back Bruh....</h2>
+								<h2>You are not an Admin, Please Go Back....</h2>
 									
 							</div>
 						</div>

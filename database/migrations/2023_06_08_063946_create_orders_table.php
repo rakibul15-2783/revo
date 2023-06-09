@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->date('date');
             $table->string('Item');
+            $table->integer('action')->default('1')->comment('1 for processing  2 for Accept');
             $table->timestamps();
         });
     }

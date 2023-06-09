@@ -19,11 +19,7 @@
                                     <a href="{{ route('order') }}" class="btn btn-sm btn-info">Order Now</a>
                                     <a href="{{ route('seeorder') }}" class="btn btn-sm btn-success">See Order</a>
                                     <a href="{{ route('logout') }}" class="btn btn-sm btn-danger">Logout</a>
-                                    @if(Auth::user()->role==2)
-                                        <a href="{{ route('orderdetails') }}" class="btn btn-sm btn-warning">Order Details</a>
-                                        <a href="{{ route('userdetails') }}" class="btn btn-sm btn-secondary">User Details</a>
-                                
-                                    @endif
+                                   
                                 </div>
 									<div class="card-title d-flex align-items-center">
 										
@@ -36,7 +32,7 @@
 									<div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Date </label>
 										<div class="col-sm-9">
-											<input type="date" name="date" value="{{ old('date') }}" class="date form-control" id="date" placeholder="Choose Date">
+											<input type="date" name="date" value="{{ old('date') }}" required  class="date form-control" id="date" placeholder="Choose Date">
                                              @error('date')
                                               <span class="text-danger">{{ $message }}</span>
                                              @enderror
@@ -47,7 +43,7 @@
 									<div class="row mb-3">
 										<label for="item" class="col-sm-3 col-form-label">Item</label>
 										<div class="col-sm-9">
-											<input type="text" name="item" value="{{ old('item') }}" class="item form-control" id="item" placeholder="Write your food name">
+											<input type="text" name="item" value="{{ old('item') }}" required class="item form-control" id="item" placeholder="Write your food name">
                                             @error('item')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -69,7 +65,38 @@
 					</div>
 				</div>
  
+<script>
+	var date = new Date;
+	var tDate = date.getDate();
+	var month = date.getMonth() + 1;
+	var currentHour = date.getHours();
+	
+    if(currentHour > 16){
+			tDate = tDate + 1;
+			if(tDate < 10){
+				tDate = "0" + tDate;
+			}
+			if(month < 10){
+				month = "0" + month;
+			}
 
+			var year = date.getUTCFullYear();
+			var minDate = year + "-" + month + "-" + tDate;
+			document.getElementById("date").setAttribute('min', minDate);
+	}
+	else{
+			if(tDate < 10){
+				tDate = "0" + tDate;
+			}
+			if(month < 10){
+				month = "0" + month;
+			}
+			var year = date.getUTCFullYear();
+			var minDate = year + "-" + month + "-" + tDate;
+			document.getElementById("date").setAttribute('min', minDate);
+	}
+	
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
