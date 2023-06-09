@@ -34,10 +34,16 @@ Route::middleware('guest')->group(function(){
     Route::get('/login',[UserController::class,'login'])->name('login');
     Route::post('/insesrtuser',[UserController::class,'insert'])->name('insesrtuser');
     Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');
+    Route::get('/adminlogin',[AdminController::class,'adminlogin'])->name('adminlogin');
+    Route::post('/adminloginpost',[AdminController::class,'adminloginpost'])->name('adminloginpost');
 });
 
+//admin controll
+Route::middleware('auth','role')->group(function () {
+    Route::get('/adminprofile',[AdminController::class,'adminprofile'])->name('adminprofile');  
+    Route::get('/adminlogout',[AdminController::class,'adminlogout'])->name('adminlogout');
 
-
+});
 
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
 

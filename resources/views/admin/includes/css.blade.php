@@ -1,0 +1,1 @@
+<link href="{{ asset('admin') }}/assets/css/app.css" rel="stylesheet">
