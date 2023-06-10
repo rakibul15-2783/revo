@@ -70,12 +70,31 @@ class AdminController extends Controller
             "msg" => "Order Accepted"
         ]);
     }
-    public function userrolechange($id){
+
+    //user role change to admin
+    public function userrolechangetoadmin($id){
         $user = User::find($id);
         $user->role = 2;
         $user->save();
         return response()->json([
-            "msg" => "Changed role user to Admin"
+            "msg" => "Made a user to Admin"
+        ]);
+    }
+    //admin role change to user
+    public function adminrolechangetouser($id){
+        $user = User::find($id);
+        $user->role = 1;
+        $user->save();
+        return response()->json([
+            "msg" => "Made a Admin to user"
+        ]);
+    }
+    //user delete
+    public function userdelete($id){
+        $user = User::find($id);
+        $user->delete();
+        return response()->json([
+            "msg" => "User/Admin Deleted"
         ]);
     }
 

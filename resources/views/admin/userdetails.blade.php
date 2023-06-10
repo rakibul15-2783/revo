@@ -4,14 +4,13 @@
 				<div class="top-bar p-3">
 				<h3><strong>Dashboard</strong> User Details</h3>
 				</div>						
-	
+				@if(Auth::user()->role==0)
 				<div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 							<div class="card">
 
 							<!-- Super admin can change role -->
-							@if(Auth::user()->role==0)
-								<table class="table table-striped">
+							
 								
 									<thead>
 										<tr>
@@ -33,27 +32,35 @@
 										<td>{{ $user->phone }}</td>
 										<td>
 											@if($user->role == 1)
-											<span>User</span>
+											<button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-user-role">User</button>
 											@elseif($user->role == 0)
 											<span>Super Admin</span>
 											@else
-											<span>Admin</span>
+											<button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-admin-role">Admin</button>
 											@endif	
                                         </td> 
 										<td>
-										    
-												<button href="#" class="btn btn-sm btn-info">Edit</button>
-												<button href="#" class="btn btn-sm btn-danger">Delete</button>
+										    @if($user->role==0)
+											<span>No Action</span>
+											@else
+											<button  value = "{{$user->id}}" class="btn btn-sm btn-info">Edit</button>
+											<button  value = "{{$user->id}}" class="btn btn-sm btn-danger btn-user-delete">Delete</button>
+											@endif
+
+												
 										</td>	
 									</tr>
 									@endforeach
 								</tbody>
-                                
+                                </div>
 								</table>
 
+								</div>
 								<!-- admin can't change role -->
 								@else
-								<table class="table table-striped">
+								<div class="table-responsive">
+							<table id="example" class="table table-striped table-bordered" style="width:100%">
+							<div class="card">
 								
 									<thead>
 										<tr>
@@ -84,27 +91,52 @@
 									</tr>
 									@endforeach
 								</tbody>
-                                
 								</table>
+								</div> 
 								@endif
-							</div>
 </div>
-							<!-- jQuery cdn -->
-							<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>			</div>
+								 <!-- jQuery cdn -->
+								 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>			</div>
 			<!-- jQuery for accept order -->
 			<script>
 				jQuery(document).ready(function(){
-					jQuery(document).on("click",".btn-user-role",function(){
+
+					//user/admin delete
+					jQuery(document).on("click",".btn-user-delete",function(){
 						var id = jQuery(this).val();
 						jQuery.ajax({
-							url: "userrolechange/" + id,
+							url: "userdelete/" + id,
 							type: "get",
 							success: function(res){
 								alert(res.msg);
 							}
-						})
-					})
-				})
+						});
+					});
+
+					//user role change to admin
+					jQuery(document).on("click",".btn-user-role",function(){
+						var id = jQuery(this).val();
+						jQuery.ajax({
+							url: "userrolechangetoadmin/" + id,
+							type: "get",
+							success: function(res){
+								alert(res.msg);
+							}
+						});
+					});
+
+					//admin role change to user
+					jQuery(document).on("click",".btn-admin-role",function(){
+						var id = jQuery(this).val();
+						jQuery.ajax({
+							url: "adminrolechangetouser/" + id,
+							type: "get",
+							success: function(res){
+								alert(res.msg);
+							}
+						});
+					});
+				});
 			</script>	
 						
 @endsection

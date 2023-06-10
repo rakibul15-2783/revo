@@ -44,8 +44,12 @@ Route::middleware('auth','role')->group(function () {
     Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
     //order accept
     Route::get('/orderaccept/{id}',[AdminController::class,'orderaccept']);
-    //order accept
-    Route::get('/userrolechange/{id}',[AdminController::class,'userrolechange']);
+    //user role change
+    Route::get('/userrolechangetoadmin/{id}',[AdminController::class,'userrolechangetoadmin']);
+    //admin role change
+    Route::get('/adminrolechangetouser/{id}',[AdminController::class,'adminrolechangetouser']);
+    //user/admin delete
+    Route::get('/userdelete/{id}',[AdminController::class,'userdelete']);
     
 });
 
