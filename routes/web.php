@@ -50,6 +50,9 @@ Route::middleware('auth','role')->group(function () {
     Route::get('/adminrolechangetouser/{id}',[AdminController::class,'adminrolechangetouser']);
     //user/admin delete
     Route::get('/userdelete/{id}',[AdminController::class,'userdelete']);
+    //make a order
+    Route::get('/makeorder',[AdminController::class,'makeorder'])->name('makeorder');
+    Route::post('/makeordersuccess',[AdminController::class,'makeordersuccess'])->name('makeordersuccess');
     
 });
 

@@ -97,6 +97,26 @@ class AdminController extends Controller
             "msg" => "User/Admin Deleted"
         ]);
     }
+           //make a order
+    public function makeorder(){
+        return view('admin.makeorder');
+    }
+    public function makeordersuccess(Request $rqst){
+        $user = User::where('username',$rqst->username)->first();
+        if(!$user){
+            return back()->with('error','User Not Found');
+        }
+        else{
+            $order = new Order;
+            $order->user_id = $user->id;
+            $order->date = $rqst->date;
+            $order->Item = $rqst->item;
+            $order->save();
+            return redirect()->route('orderdetails');
+        }
+        
+    }
+
 
     //logout 
     public function adminlogout(){

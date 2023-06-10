@@ -13,8 +13,9 @@
                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                      </a>
                      <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
-                        <li class="sidebar-item active"><a class="sidebar-link" href="{{ route('userdetails') }}">User Details</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('userdetails') }}">User Details</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ route('orderdetails') }}">Order Details</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('makeorder') }}">Make Order</a></li>
                      </ul>
                   </li>  
                </ul>
