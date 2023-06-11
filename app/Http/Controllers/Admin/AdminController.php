@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Deposit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -116,6 +117,31 @@ class AdminController extends Controller
         }
         
     }
+    //deposit
+
+    public function deposit(){
+        return view('admin.deposit');
+    }
+    public function depositpost(Request $rqst){
+        $user = User::where('username',$rqst->username)->first();
+        if(!$user){
+            return back()->with('error','User not found!');
+        }
+        else{
+            $deposit = new Deposit;
+            $deposit->user_id = $user->id;
+            $deposit->amount = $rqst->amount;
+            $deposit->save();
+            return redirect()->route('depositview');
+
+        }
+    }
+    public function depositview(){
+        $deposits = Deposit::all();
+        return view('admin.depositview',compact('deposits'));
+    }
+    
+    
 
 
     //logout 

@@ -8,18 +8,20 @@
 				<div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 							<div class="card">
+								
+								<table class="table table-striped">
 
 							<!-- Super admin can change role -->
 							
 								
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Username</th>
-											<th>Email</th>
-											<th>Phone</th>
-											<th>Role</th>
-											<th>Action</th>
+											<th style="width:25%;">Name</th>
+											<th style="width:10%;">Username</th>
+											<th style="width:20%;">Email</th>
+											<th style="width:20%;">Phone</th>
+											<th style="width:10%;">Role</th>
+											<th style="width:30%;">Action</th>
 										</tr>
 									</thead>
 								<tbody>
@@ -61,6 +63,8 @@
 								<div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 							<div class="card">
+								
+								<table class="table table-striped">
 								
 									<thead>
 										<tr>

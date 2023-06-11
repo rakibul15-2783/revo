@@ -16,6 +16,8 @@
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ route('userdetails') }}">User Details</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ route('orderdetails') }}">Order Details</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="{{ route('makeorder') }}">Make Order</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('deposit') }}">Deposit</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('depositview') }}">View Amount</a></li>
                      </ul>
                   </li>  
                </ul>

@@ -53,6 +53,11 @@ Route::middleware('auth','role')->group(function () {
     //make a order
     Route::get('/makeorder',[AdminController::class,'makeorder'])->name('makeorder');
     Route::post('/makeordersuccess',[AdminController::class,'makeordersuccess'])->name('makeordersuccess');
+    //deposit
+    Route::get('/deposit',[AdminController::class,'deposit'])->name('deposit');
+    Route::post('/depositpost',[AdminController::class,'depositpost'])->name('depositpost');
+    //view amount
+    Route::get('/depositview',[AdminController::class,'depositview'])->name('depositview');
     
 });
 

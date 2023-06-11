@@ -2,7 +2,7 @@
 @extends('admin.includes.master')
 @section('main-content')
                     <div class="top-bar p-3">
-					<h3><strong>Dashboard</strong> Order Details</h3>
+					<h3><strong>Dashboard</strong> Make Order</h3>
 					</div>	
 
 					<div class="col-xl-6 mx-auto p-4">
@@ -60,7 +60,7 @@
 								</div>
 							</div>
 						</div>
- 
+ <!-- don't make todays order when it past 5.00 pm and previous days -->
 <script>
 	var date = new Date;
 	var tDate = date.getDate();
