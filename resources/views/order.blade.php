@@ -52,7 +52,7 @@
 									<div class="row">
 										<label class="col-sm-3 col-form-label"></label>
 										<div class="col-sm-9">
-											<button type="submit" name="submit" class="submit btn btn-info px-5">Submit Order</button>
+											<button type="submit" name="submit" onclick = "return dayoff();" class="submit btn btn-info px-5">Submit Order</button>
 											
 										</div>
 									</div>
@@ -70,6 +70,24 @@
 	var tDate = date.getDate();
 	var month = date.getMonth() + 1;
 	var currentHour = date.getHours();
+
+	
+
+    function dayoff() {
+		var dateInput = document.getElementById("date");
+		var selectedDate = new Date(dateInput.value);
+		var selectedDay = selectedDate.getDay();
+        if (selectedDay === 5 || selectedDay === 6 || selectedDay === 0) {
+            alert('You cannot order on Friday, Saturday, and Sunday.');
+            return false;
+        }
+
+        else{
+			return true;
+		}
+
+        
+    }
 	
     if(currentHour > 16){
 			tDate = tDate + 1;
