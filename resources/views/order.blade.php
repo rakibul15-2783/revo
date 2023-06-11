@@ -24,9 +24,6 @@
 									<div class="card-title d-flex align-items-center">
 										
 									</div>
-									
-						
-                                    
                                     <form action="{{ route('ordersuccess') }}" method="POST">
                                        @csrf
 									<div class="row mb-3">
@@ -56,8 +53,6 @@
 											
 										</div>
 									</div>
-
-									
                                     </form>
 								</div>
 							</div>
@@ -72,11 +67,12 @@
 	var currentHour = date.getHours();
 
 	
-
+  //do not make order in friday, saturday and sunday
     function dayoff() {
 		var dateInput = document.getElementById("date");
 		var selectedDate = new Date(dateInput.value);
 		var selectedDay = selectedDate.getDay();
+		//Sunday = 0, monday = 1 .....
         if (selectedDay === 5 || selectedDay === 6 || selectedDay === 0) {
             alert('You cannot order on Friday, Saturday, and Sunday.');
             return false;
@@ -86,9 +82,8 @@
 			return true;
 		}
 
-        
     }
-	
+	//can not todays order after 5.00 pm
     if(currentHour > 16){
 			tDate = tDate + 1;
 			if(tDate < 10){

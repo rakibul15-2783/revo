@@ -26,7 +26,7 @@
 									<div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Date </label>
 										<div class="col-sm-9">
-											<input type="date" name="date" value="{{ old('date') }}" required  class="date form-control" id="date" placeholder="Choose Date">
+											<input type="date" name="date"  required  class="date form-control" id="date" placeholder="Choose Date">
                                              @error('date')
                                               <span class="text-danger">{{ $message }}</span>
                                              @enderror
@@ -46,7 +46,7 @@
 									<div class="row">
 										<label class="col-sm-3 col-form-label"></label>
 										<div class="col-sm-9">
-											<button type="submit" name="submit" class="submit btn btn-info px-5">Submit Order</button>
+											<button type="submit" name="submit" onclick="return dayoff();" class="submit btn btn-info px-5">Submit Order</button>
 											
 										</div>
 									</div>
@@ -67,6 +67,23 @@
 	var month = date.getMonth() + 1;
 	var currentHour = date.getHours();
 	
+	//do not make order in friday, saturday and sunday
+    function dayoff() {
+		var dateInput = document.getElementById("date");
+		var selectedDate = new Date(dateInput.value);
+		var selectedDay = selectedDate.getDay();
+		//Sunday = 0, monday = 1 .....
+        if (selectedDay === 5 || selectedDay === 6 || selectedDay === 0) {
+            alert('You cannot order on Friday, Saturday, and Sunday.');
+            return false;
+        }
+
+        else{
+			return true;
+		}
+
+    }
+	//can not todays order after 5.00 pm
     if(currentHour > 16){
 			tDate = tDate + 1;
 			if(tDate < 10){
