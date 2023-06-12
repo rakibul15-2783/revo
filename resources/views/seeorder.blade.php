@@ -39,10 +39,10 @@
                                     </thead>
                                     <tbody>
                                         
-                                    @foreach($orders as $order)
+                                    @foreach($orders->sortByDesc('created_at') as $order)
                                     
                                         <tr>
-                                        <td>{{ $order->created_at }}</td>
+                                        <td>{{ $order->created_at->format('F j, Y, g:i A') }}</td>
                                         <td>{{ $order->date }}</td>
                                         <td>{{ $order->Item }}</td>
                                         <td>

@@ -36,7 +36,7 @@
 										</tr>
 									</thead>
 								<tbody>
-								@foreach($deposits as $deposit)
+								@foreach($deposits->sortByDesc('created_at') as $deposit)
 									<tr>
 										<td>{{ $deposit->user->name }}</td>
 										
