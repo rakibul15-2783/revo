@@ -8,17 +8,26 @@
                   <li class="sidebar-header">
                      Pages
                   </li>
-                  <li class="sidebar-item active">
-                     <a href="#dashboard" data-toggle="collapse" class="sidebar-link collapsed">
+                  <li class="sidebar-item ">
+                     <a href="{{ route('adminprofile') }}"  class="sidebar-link collapsed">
                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                      </a>
-                     <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('userdetails') }}">User Details</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('orderdetails') }}">Order Details</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('makeorder') }}">Make Order</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('deposit') }}">Deposit</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{ route('depositview') }}">View Amount</a></li>
-                     </ul>
+                     <a href="{{ route('userdetails') }}"  class="sidebar-link collapsed">
+                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Details</span>
+                     </a>
+                     <a href="{{ route('orderdetails') }}"  class="sidebar-link collapsed">
+                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Order Details</span>
+                     </a>
+                     <a href="{{ route('makeorder') }}"  class="sidebar-link collapsed">
+                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Make Order</span>
+                     </a>
+                     <a href="{{ route('deposit') }}"  class="sidebar-link collapsed">
+                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Deposit</span>
+                     </a>
+                     <a href="{{ route('depositview') }}"  class="sidebar-link collapsed">
+                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">View Amount</span>
+                     </a>
+                     
                   </li>  
                </ul>
             </div>

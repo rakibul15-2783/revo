@@ -46,7 +46,7 @@ class AdminController extends Controller
     //user info
     public function userdetails(){
 
-        $users = User::paginate(8);
+        $users = User::paginate(4);
 
         return view('admin.userdetails',compact('users'));
     }
@@ -143,7 +143,33 @@ class AdminController extends Controller
         return view('admin.depositview',compact('deposits'));
     }
     
-    
+    //search deposit
+    public function searchdeposit(Request $rqst){
+        
+        $query = $rqst->input('search');
+        $deposits = Deposit::whereHas('user', function ($queryBuilder) use ($query) {
+            $queryBuilder->where('name', 'like', '%' . $query . '%');
+        })->get();
+
+        return view('admin.searchdeposit',compact('deposits'));
+    }
+
+    //search user by name
+    public function searchuser(Request $rqst){
+        
+        $query = $rqst->input('search');
+        $users = User::where('name', 'like', '%' . $query . '%')->get();
+
+        return view('admin.searchuser',compact('users'));
+    }
+    //search user by email
+    public function searchuserbyemail(Request $rqst){
+        
+        $query = $rqst->input('search');
+        $users = User::where('email', 'like', '%' . $query . '%')->get();
+
+        return view('admin.searchuser',compact('users'));
+    }
 
 
     //logout 

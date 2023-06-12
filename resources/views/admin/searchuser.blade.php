@@ -5,34 +5,18 @@
 				<h4><strong>Dashboard</strong> User Details</h>
 				</div>		
 				<!-- for searching -->
-				<div class="row">
-					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="{{ route('searchuser') }}">
+				<div class="col-md-3 my-auto">
+						<form role = "search" method="GET" action="">
 							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the name" class="form-control">
-							<button class="btn bg-info " type="submit">
-							Search
-							</button>
+							<input type="search" name="search" placeholder="Search by the name" value="{{ Request::get('search') }}" class="form-control">
+							<a href="{{ route('userdetails') }}" class="btn bg-danger " type="submit">
+							Cancel
+                            </a>
 
 							</div>
 						</form>
-					</div>
-					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="{{ route('searchuserbyemail') }}">
-							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the email" class="form-control">
-							<button class="btn bg-info " type="submit">
-							Search
-							</button>
-
-							</div>
-						</form>
-					</div>
-				</div>			
-				
+					</div>		
 				@if(Auth::user()->role==0)
-				<div class="card-body">
-                            <div class="border p-4 rounded">
 				<div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 							<div class="card">
@@ -84,16 +68,10 @@
 								</tbody>
                                 </div>
 								</table>
-								
 
-								</div>
-								</div>
-								{{ $users->links() }}
 								</div>
 								<!-- admin can't change role -->
 								@else
-								<div class="card-body">
-                            <div class="border p-4 rounded">
 								<div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 							<div class="card">
@@ -130,14 +108,9 @@
 									@endforeach
 								</tbody>
 								</table>
-								
 								</div> 
 								@endif
 </div>
-</div>
-{{ $users->links() }}
-</div>
-
 								 <!-- jQuery cdn -->
 								 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>			</div>
 			<!-- jQuery for accept order -->
@@ -181,24 +154,6 @@
 					});
 				});
 			</script>
-			<script>
-								function searchFunction(){
-									let filter = document.getElementById('myInput').value.toUpperCase();
-									let myTable = document.getElementById('myTable');
-									let tr = myTable.getElementsByTagName('tr');
-									for(var i= 0; i<tr.length; i++){
-										let td = tr[i].getElementsByTagName('td')[0];
-										if(td){
-											let textValue = td.textContext || td.innerHTML;
-											if(textValue.toUpperCase().indexOf(filter) > -1){
-												tr[1].style.display = "";
-											}
-											else{
-												tr[i].style.display = "none";
-											}
-										}
-									}
-								}
-							</script>	
+			
 						
 @endsection

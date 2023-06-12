@@ -33,7 +33,7 @@ Route::middleware('guest')->group(function(){
     Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');
     Route::get('/adminlogin',[AdminController::class,'adminlogin'])->name('adminlogin');
     Route::post('/adminloginpost',[AdminController::class,'adminloginpost'])->name('adminloginpost');
-    
+     
 });
 
 //admin controll
@@ -58,6 +58,13 @@ Route::middleware('auth','role')->group(function () {
     Route::post('/depositpost',[AdminController::class,'depositpost'])->name('depositpost');
     //view amount
     Route::get('/depositview',[AdminController::class,'depositview'])->name('depositview');
+    //Search deposit
+    Route::get('/searchdeposit',[AdminController::class,'searchdeposit'])->name('searchdeposit');
+    //Search user by name
+    Route::get('/searchuser',[AdminController::class,'searchuser'])->name('searchuser');
+    //Search user by email
+    Route::get('/searchuserbyemail',[AdminController::class,'searchuserbyemail'])->name('searchuserbyemail');
+    
     
 });
 

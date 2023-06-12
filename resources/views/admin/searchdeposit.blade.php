@@ -3,29 +3,23 @@
 					<div class="top-bar p-3">
 					<h4><strong>Dashboard</strong> View Amount</h4>
 					</div>	
-					<!-- for searching -->
+					
 					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="{{ route('searchdeposit') }}">
+						<form role = "search" method="GET" action="">
 							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the name"  class="form-control">
-							<button class="btn bg-info " type="submit">
-							Search
-							</button>
+							<input type="search" name="search" placeholder="Search by the name" value="{{ Request::get('search') }}" class="form-control">
+							<a href="{{ route('userdetails') }}" class="btn bg-danger " type="submit">
+							Cancel
+                            </a>
 
 							</div>
 						</form>
 					</div>
-
-					
-					<div class="card-body">
-                            <div class="border p-4 rounded">
-							
 					
                             <div class="table-responsive">
 							<table id="myTable" class="table table-striped table-bordered" style="width:100%">
-							
 							<div class="card">
-							<table class="table table-striped">
+								
 								
 									<thead>
 										<tr>
@@ -55,34 +49,9 @@
 								</tbody>
                                 
 								</table>
-								
 							</div>
 </div>
 </div>
-{{ $deposits->links() }}
-</div>
-
-</div>
-				           		
-							<script>
-								function searchFunction(){
-									let filter = document.getElementById('myInput').value.toUpperCase();
-									let myTable = document.getElementById('myTable');
-									let tr = myTable.getElementsByTagName('tr');
-									for(var i= 0; i<tr.length; i++){
-										let td = tr[i].getElementsByTagName('td')[0];
-										if(td){
-											let textValue = td.textContext || td.innerHTML;
-											if(textValue.toUpperCase().indexOf(filter) > -1){
-												tr[1].style.display = "";
-											}
-											else{
-												tr[i].style.display = "none";
-											}
-										}
-									}
-								}
-							</script>	
-												
+				          	
 			
 @endsection
