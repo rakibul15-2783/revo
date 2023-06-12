@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Carbon\Carbon;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -38,14 +39,14 @@ class AdminController extends Controller
 
     //user order details
     public function orderdetails(){
-        $orders = Order::all();
+        $orders = Order::paginate(8);
         return view('admin.orderdetails',compact('orders'));
     }
 
     //user info
     public function userdetails(){
 
-        $users = User::all();
+        $users = User::paginate(8);
 
         return view('admin.userdetails',compact('users'));
     }
@@ -100,7 +101,8 @@ class AdminController extends Controller
     }
            //make a order
     public function makeorder(){
-        return view('admin.makeorder');
+        $users = User::all();
+        return view('admin.makeorder',compact('users'));
     }
     public function makeordersuccess(Request $rqst){
         $user = User::where('username',$rqst->username)->first();
@@ -137,7 +139,7 @@ class AdminController extends Controller
         }
     }
     public function depositview(){
-        $deposits = Deposit::all();
+        $deposits = Deposit::paginate(8);
         return view('admin.depositview',compact('deposits'));
     }
     

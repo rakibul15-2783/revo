@@ -1,14 +1,14 @@
 @extends('admin.includes.master')
 @section('main-content')
                     <div class="top-bar p-3">
-					<h3><strong>Dashboard</strong> Deposit</h3>
+					<h4><strong>Dashboard</strong> Deposit</h4>
 					</div>	
 				
 					<div class="col-xl-6 mx-auto p-4">
 							<div class="card-body">
                             <div class="border p-4 rounded">
 								
-                                    <form onsubmit="return validateForm()" action="{{ route('depositpost') }}" method="POST">
+                                    <form  action="{{ route('depositpost') }}" method="POST">
                                        @csrf
                                        <div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Username</label>
@@ -48,20 +48,7 @@
 					</div>
 				</div>
                 
-                <!-- can't submit a from without 1 to 10th day of a month -->
-                <script>
-  function validateForm() {
-    var selectedDate = new Date;
-    var day = selectedDate.getDate();
-    
-    if (day >= 1 && day <= 10) {
-      return true; // Allow form submission
-    } else {
-      alert("Form submission is only allowed from the 1st to 10th of the month.");
-      return false; // Prevent form submission
-    }
-  }
-</script>
+                
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 @endsection

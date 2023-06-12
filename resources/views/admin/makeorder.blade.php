@@ -2,7 +2,7 @@
 @extends('admin.includes.master')
 @section('main-content')
                     <div class="top-bar p-3">
-					<h3><strong>Dashboard</strong> Make Order</h3>
+					<h4><strong>Dashboard</strong> Make Order</h4>
 					</div>	
 
 					<div class="col-xl-6 mx-auto p-4">
@@ -16,10 +16,12 @@
 									<div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Username</label>
 										<div class="col-sm-9">
-											<input type="text" name="username" value="{{ old('Username') }}" required  class="username form-control" id="username" placeholder="Type Username">
-                                             @error('username')
-                                              <span class="text-danger">{{ $message }}</span>
-                                             @enderror
+										<select class="select-user-for-order form-control" name="username">
+											 @foreach($users as $user)
+												<option value="">Select User</option>
+												<option value="{{$user->username}}">{{$user->username}}</option>
+												@endforeach
+											</select>
                                         </div>
                                         
 									</div>
@@ -60,6 +62,12 @@
 								</div>
 							</div>
 						</div>
+
+						<script>
+							$(document).ready(function() {
+								$('.select-user-for-order').select2();
+							});
+						</script>
  <!-- don't make todays order when it past 5.00 pm and previous days -->
 <script>
 	var date = new Date;
@@ -85,7 +93,7 @@
     }
 	//can not todays order after 5.00 pm
     if(currentHour > 16){
-			tDate = tDate + 1;
+			tDate = tDate + 2;
 			if(tDate < 10){
 				tDate = "0" + tDate;
 			}
@@ -98,6 +106,7 @@
 			document.getElementById("date").setAttribute('min', minDate);
 	}
 	else{
+		tDate = tDate + 1;
 			if(tDate < 10){
 				tDate = "0" + tDate;
 			}

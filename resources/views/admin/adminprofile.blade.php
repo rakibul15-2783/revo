@@ -1,6 +1,6 @@
 @extends('admin.includes.master')
 @section('main-content')
-<h2>dashboard</h2>
+<h4>Dashboard</h4>
 <script>
    var date = new Date();
 var dayOfWeek = date.getDay();

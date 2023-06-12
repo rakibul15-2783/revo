@@ -2,8 +2,10 @@
 @extends('admin.includes.master')
 @section('main-content')  
 				<div class="top-bar p-3">
-				<h3><strong>Dashboard</strong> User Details</h3>
-				</div>						
+				<h4><strong>Dashboard</strong> User Details</h>
+				</div>		
+				<input type="text" id = "myInput" placeholder ="Search by the name" onkeyup="searchFunction()"><br><br>				
+				{{ $users->links() }}
 				@if(Auth::user()->role==0)
 				<div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -141,6 +143,25 @@
 						});
 					});
 				});
-			</script>	
+			</script>
+			<script>
+								function searchFunction(){
+									let filter = document.getElementById('myInput').value.toUpperCase();
+									let myTable = document.getElementById('myTable');
+									let tr = myTable.getElementsByTagName('tr');
+									for(var i= 0; i<tr.length; i++){
+										let td = tr[i].getElementsByTagName('td')[0];
+										if(td){
+											let textValue = td.textContext || td.innerHTML;
+											if(textValue.toUpperCase().indexOf(filter) > -1){
+												tr[1].style.display = "";
+											}
+											else{
+												tr[i].style.display = "none";
+											}
+										}
+									}
+								}
+							</script>	
 						
 @endsection

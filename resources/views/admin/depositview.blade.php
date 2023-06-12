@@ -1,18 +1,20 @@
 @extends('admin.includes.master')
 @section('main-content')  
 					<div class="top-bar p-3">
-					<h3><strong>Dashboard</strong> View Amount</h3>
+					<h4><strong>Dashboard</strong> View Amount</h4>
 					</div>	
+					<input type="text" id = "myInput" placeholder ="Search by the name" onkeyup="searchFunction()"><br><br>
+					{{ $deposits->links() }}
                             <div class="table-responsive">
-							<table id="example" class="table table-striped table-bordered" style="width:100%">
+							<table id="myTable" class="table table-striped table-bordered" style="width:100%">
 							<div class="card">
 								
-								<table class="table table-striped">
+								
 									<thead>
 										<tr>
-											<th style="width:40%;">Name</th>
-											<th style="width:25%">User name</th>
+											<th style=" width:40%;">Name</th>
 											<th style="width:25%">Amount</th>
+											<th style="width:25%">Month</th>
 											<th style="width:25%">Deposit Date</th>
 										</tr>
 									</thead>
@@ -20,15 +22,17 @@
 								@foreach($deposits as $deposit)
 									<tr>
 										<td>{{ $deposit->user->name }}</td>
-										<td>
-                                            {{ $deposit->user->username }}
-                                        </td>
+										
 										<td>
 											{{ $deposit->amount }}	
 										</td>
+										<td>
+											{{ $deposit->created_at->format('F')}}	
+										</td>
 										
                                         
-										<td>{{ $deposit->created_at }}</td>	
+										<td>{{ $deposit->created_at->format('F j, Y, g:i A') }}</td>
+	
 									</tr>
 									@endforeach
 								</tbody>
@@ -36,23 +40,27 @@
 								</table>
 							</div>
 </div>
-				            <!-- jQuery cdn -->
-								<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>			</div>
-			<!-- jQuery for accept order -->
-			<script>
-				jQuery(document).ready(function(){
-					jQuery(document).on("click",".btn-order-process",function(){
-						var id = jQuery(this).val();
-						jQuery.ajax({
-							url: "orderaccept/" + id,
-							type: "get",
-							success: function(res){
-								alert(res.msg);
-							}
-						})
-					})
-				})
-			</script>				
-						
+</div>
+				           		
+							<script>
+								function searchFunction(){
+									let filter = document.getElementById('myInput').value.toUpperCase();
+									let myTable = document.getElementById('myTable');
+									let tr = myTable.getElementsByTagName('tr');
+									for(var i= 0; i<tr.length; i++){
+										let td = tr[i].getElementsByTagName('td')[0];
+										if(td){
+											let textValue = td.textContext || td.innerHTML;
+											if(textValue.toUpperCase().indexOf(filter) > -1){
+												tr[1].style.display = "";
+											}
+											else{
+												tr[i].style.display = "none";
+											}
+										}
+									}
+								}
+							</script>	
+												
 			
 @endsection
