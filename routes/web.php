@@ -73,5 +73,6 @@ Route::get('/goback',[AdminController::class,'goback'])->name('goback');
 
 
 Route::get('/', function () {
+    
     return view('welcome');
 });

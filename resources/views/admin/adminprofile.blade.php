@@ -15,7 +15,7 @@
 
    $date = Carbon::now();
    $thisMonth = $date->format('F');
-   
+   $thisMonthOrder = Deposit::where('month', 'like', '%' . $thisMonth . '%')->count();
 
    
    $todaysOrder = User::count();
@@ -69,7 +69,7 @@
 								</div>
 								
 								<div class=" textcenter p-1 text-white text-center">
-									<h2 class="text-white"></h2>
+									<h2 class="text-white">{{ $thisMonthOrder }}</h2>
 									
 								</div>
 							</div>

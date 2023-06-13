@@ -13,7 +13,14 @@
                                        <div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Username</label>
 										<div class="col-sm-9">
-											<input type="text" name="username" value="{{ old('Username') }}" required  class="username form-control" id="username" placeholder="Type Username">
+										<select class="js-example-basic-single form-control" required name="username">
+										<option value="">Select User</option>
+											 @foreach($users as $user)
+												
+												<option value="{{$user->username}}">{{$user->username}}</option>
+												@endforeach
+										</select>
+											
                                              @error('username')
                                               <span class="text-danger">{{ $message }}</span>
                                              @enderror
@@ -66,14 +73,26 @@
 									<div id="errorMessage" class="mt-3 alert alert-danger fade" role="alert"></div>
 
                                     </form>
-                                    
+                        
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-                
+
+                <script>
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+})
+
+
+</script>
                 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+@endsection
+
+@section('js')
+
+
 @endsection

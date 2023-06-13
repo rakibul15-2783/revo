@@ -39,7 +39,11 @@ class AdminController extends Controller
 
                                           //order details
     public function orderdetails(Request $request){
-        $searchQuery = $request->search;
+        $searchQuery = $request->input('search');
+        $searchQueryByOrder = $request->input('searchbyorder');
+        $searchQueryByProgress = $request->input('searchbyprogress');
+        $searchQueryByDate = $request->input('searchbydate');
+
         $query = Order::query()->orderByDesc('date');
 
         if (!is_null($searchQuery)) {
@@ -49,9 +53,40 @@ class AdminController extends Controller
                     ->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
             });
         }
+        if (!is_null($searchQueryByOrder)) {
+            $searchQueryByOrder = trim($searchQueryByOrder);
+            $query->where('Item','LIKE', '%'.$searchQueryByOrder.'%');
+        }
+        if (!is_null($searchQueryByProgress)) {
+            $searchQueryByProgress = trim($searchQueryByProgress);
+            if ($searchQueryByProgress == "active" || $searchQueryByProgress == "Active") {
+                $searchQueryByProgress = 2;
+                $query->where('action', $searchQueryByProgress);
+            } elseif ($searchQueryByProgress == "Processing" || $searchQueryByProgress == "processing") {
+                $searchQueryByProgress = 1;
+                $query->where('action', $searchQueryByProgress);
+            }
+            
+        }
+        if (!is_null($searchQueryByDate)) {
+            $searchQueryByDate = trim($searchQueryByDate);
+            $query->where('date','LIKE', '%'.$searchQueryByDate.'%');
+        }
     
         $orders = $query->paginate(8);
-        return view('admin.orderdetails',compact('orders'));
+        $orders->appends($request->except('page'))->appends([
+            'search' => $searchQuery,
+            'searchbyorder' => $searchQueryByOrder,
+            'searchbyprogress' => $searchQueryByProgress,
+            'searchbydate' => $searchQueryByDate,
+        ]);;
+        return view('admin.orderdetails', compact(
+            'orders',
+            'searchQuery',
+            'searchQueryByOrder',
+            'searchQueryByProgress',
+            'searchQueryByDate'
+        ));
     }
 
                                                 //user info
@@ -146,7 +181,8 @@ class AdminController extends Controller
                                                //deposit
 
     public function deposit(){
-        return view('admin.deposit');
+        $users = User::all();
+        return view('admin.deposit',compact('users'));
     }
     public function depositpost(Request $rqst){
         $user = User::where('username',$rqst->username)->first();

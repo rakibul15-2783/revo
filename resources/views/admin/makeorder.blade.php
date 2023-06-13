@@ -1,6 +1,7 @@
 
 @extends('admin.includes.master')
 @section('main-content')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
                     <div class="top-bar p-3">
 					<h4><strong>Dashboard</strong> Make Order</h4>
 					</div>	
@@ -16,12 +17,14 @@
 									<div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Username</label>
 										<div class="col-sm-9">
+										
 										<select class="select-user-for-order form-control" name="username">
+										<option value="">Select User</option>
 											 @foreach($users as $user)
-												<option value="">Select User</option>
+												
 												<option value="{{$user->username}}">{{$user->username}}</option>
 												@endforeach
-											</select>
+										</select>
                                         </div>
                                         
 									</div>
@@ -119,5 +122,5 @@
 	}
 	
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
