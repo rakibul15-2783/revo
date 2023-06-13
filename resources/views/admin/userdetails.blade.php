@@ -7,9 +7,9 @@
 				<!-- for searching -->
 				<div class="row">
 					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="{{ route('searchuser') }}">
+						<form role = "search" method="GET" action="">
 							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the name" class="form-control">
+							<input type="search" name="search" placeholder="Search by the name/email" class="form-control">
 							<button class="btn bg-info " type="submit">
 							Search
 							</button>
@@ -17,17 +17,7 @@
 							</div>
 						</form>
 					</div>
-					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="{{ route('searchuserbyemail') }}">
-							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the email" class="form-control">
-							<button class="btn bg-info " type="submit">
-							Search
-							</button>
-
-							</div>
-						</form>
-					</div>
+					
 				</div>			
 				
 				@if(Auth::user()->role==0)
@@ -64,14 +54,14 @@
 											@if($user->role == 1)
 											<button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-user-role">User</button>
 											@elseif($user->role == 0)
-											<span>Super Admin</span>
+											<span class="badge badge-success">Super Admin</span>
 											@else
 											<button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-admin-role">Admin</button>
 											@endif	
                                         </td> 
 										<td>
 										    @if($user->role==0)
-											<span>No Action</span>
+											<span class="badge badge-success" >No Action</span>
 											@else
 											<button  value = "{{$user->id}}" class="btn btn-sm btn-info">Edit</button>
 											<button  value = "{{$user->id}}" class="btn btn-sm btn-danger btn-user-delete">Delete</button>
@@ -119,11 +109,11 @@
 										<td>{{ $user->phone }}</td>
 										<td>
 											@if($user->role == 1)
-											<span>User</span>
+											<span class="badge badge-warning">User</span>
 											@elseif($user->role == 0)
-											<span>Super Admin</span>
+											<span class="badge badge-danger">Super Admin</span>
 											@else
-											<span>Admin</span>
+											<span class="badge badge-success">Admin</span>
 											@endif	
                                         </td>	
 									</tr>

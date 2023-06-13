@@ -20,6 +20,31 @@
                                         </div>
                                         
 									</div>
+                                       <div class="row mb-3">
+										<label for="month" class=" col-sm-3 col-form-label ">Month</label>
+										<div class="col-sm-9 ">
+											<select class="form-control " required name="month" id="month">
+												<option value="">-----Select Month-----</option>
+												<option value="January">January</option>
+												<option value="February">February</option>
+												<option value="March">March</option>
+												<option value="April">April</option>
+												<option value="May">May</option>
+												<option value="June">June</option>
+												<option value="July">July</option>
+												<option value="August">August</option>
+												<option value="September">September</option>
+												<option value="October">October</option>
+												<option value="November">November</option>
+												<option value="December">December</option>
+											</select>
+											@error('month')
+                                              <span class="text-danger">{{ $message }}</span>
+                                             @enderror
+											
+                                        </div>
+                                        
+									</div>
 
 									<div class="row mb-3">
 										<label for="item" class="col-sm-3 col-form-label">Amount</label>

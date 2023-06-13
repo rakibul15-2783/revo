@@ -37,33 +37,57 @@ class AdminController extends Controller
     
     }
 
-    //user order details
-    public function orderdetails(){
-        $orders = Order::paginate(8);
+                                          //order details
+    public function orderdetails(Request $request){
+        $searchQuery = $request->search;
+        $query = Order::query()->orderByDesc('date');
+
+        if (!is_null($searchQuery)) {
+            $searchQuery = trim($searchQuery);
+            $query->whereHas('user', function ($query) use ($searchQuery) {
+                $query->where('name', 'LIKE', '%' . $searchQuery . '%')
+                    ->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
+            });
+        }
+    
+        $orders = $query->paginate(8);
         return view('admin.orderdetails',compact('orders'));
     }
 
-    //user info
-    public function userdetails(){
+                                                //user info
+    public function userdetails(Request $request){
 
-        $users = User::paginate(4);
+
+        $searchQuery = $request->search;
+
+        $query = User::orderBy('id','desc');
+
+        if(!is_null($searchQuery))
+        
+        {
+            $searchQuery = trim($searchQuery);
+            $query->where('name','LIKE', '%'.$searchQuery.'%')->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
+        }
+
+        $users =  $query->paginate(4);
 
         return view('admin.userdetails',compact('users'));
     }
 
-    //if someones role is user
+
+                                      //if someones role is user
 
     public function goback(){
         return view('goback');
     }
 
-    //admin main profile/dashboard
+                                //admin main profile/dashboard
 
     public function adminprofile(){
         return view('admin.adminprofile');
     }
 
-    //order accept
+                                         //order accept
     public function orderaccept($id){
         $order = Order::find($id);
         $order->action = 2;
@@ -73,7 +97,7 @@ class AdminController extends Controller
         ]);
     }
 
-    //user role change to admin
+                                             //user role change to admin
     public function userrolechangetoadmin($id){
         $user = User::find($id);
         $user->role = 2;
@@ -82,7 +106,7 @@ class AdminController extends Controller
             "msg" => "Made a user to Admin"
         ]);
     }
-    //admin role change to user
+                                          //admin role change to user
     public function adminrolechangetouser($id){
         $user = User::find($id);
         $user->role = 1;
@@ -91,7 +115,7 @@ class AdminController extends Controller
             "msg" => "Made a Admin to user"
         ]);
     }
-    //user delete
+                                        //user delete
     public function userdelete($id){
         $user = User::find($id);
         $user->delete();
@@ -99,7 +123,7 @@ class AdminController extends Controller
             "msg" => "User/Admin Deleted"
         ]);
     }
-           //make a order
+                                    //make a order
     public function makeorder(){
         $users = User::all();
         return view('admin.makeorder',compact('users'));
@@ -119,7 +143,7 @@ class AdminController extends Controller
         }
         
     }
-    //deposit
+                                               //deposit
 
     public function deposit(){
         return view('admin.deposit');
@@ -132,44 +156,33 @@ class AdminController extends Controller
         else{
             $deposit = new Deposit;
             $deposit->user_id = $user->id;
+            $deposit->month = $rqst->month;
             $deposit->amount = $rqst->amount;
             $deposit->save();
             return redirect()->route('depositview');
 
         }
     }
-    public function depositview(){
-        $deposits = Deposit::paginate(8);
+    public function depositview(Request $request){
+        $searchQuery = $request->search;
+        $query = Deposit::query()->orderBy('month');
+
+        if (!is_null($searchQuery)) {
+            $searchQuery = trim($searchQuery);
+            $query->whereHas('user', function ($query) use ($searchQuery) {
+                $query->where('name', 'LIKE', '%' . $searchQuery . '%')
+                    ->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
+            });
+        }
+    
+        $deposits = $query->paginate(8);
         return view('admin.depositview',compact('deposits'));
     }
     
-    //search deposit
-    public function searchdeposit(Request $rqst){
-        
-        $query = $rqst->input('search');
-        $deposits = Deposit::whereHas('user', function ($queryBuilder) use ($query) {
-            $queryBuilder->where('name', 'like', '%' . $query . '%');
-        })->get();
+   
 
-        return view('admin.searchdeposit',compact('deposits'));
-    }
-
-    //search user by name
-    public function searchuser(Request $rqst){
-        
-        $query = $rqst->input('search');
-        $users = User::where('name', 'like', '%' . $query . '%')->get();
-
-        return view('admin.searchuser',compact('users'));
-    }
-    //search user by email
-    public function searchuserbyemail(Request $rqst){
-        
-        $query = $rqst->input('search');
-        $users = User::where('email', 'like', '%' . $query . '%')->get();
-
-        return view('admin.searchuser',compact('users'));
-    }
+   
+    
 
 
     //logout 

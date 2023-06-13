@@ -4,17 +4,20 @@
 					<h4><strong>Dashboard</strong> View Amount</h4>
 					</div>	
 					<!-- for searching -->
+				<div class="row">
 					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="{{ route('searchdeposit') }}">
+						<form role = "search" method="GET" action="">
 							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the name"  class="form-control">
+							<input type="search" name="search" placeholder="Search by the name/email" class="form-control">
 							<button class="btn bg-info " type="submit">
 							Search
 							</button>
 
 							</div>
 						</form>
-					</div>
+					</div>	
+					
+				</div>	
 
 					
 					<div class="card-body">
@@ -36,7 +39,7 @@
 										</tr>
 									</thead>
 								<tbody>
-								@foreach($deposits->sortByDesc('created_at') as $deposit)
+								@foreach($deposits as $deposit)
 									<tr>
 										<td>{{ $deposit->user->name }}</td>
 										
@@ -44,7 +47,7 @@
 											{{ $deposit->amount }}	
 										</td>
 										<td>
-											{{ $deposit->created_at->format('F')}}	
+											{{ $deposit->month}}	
 										</td>
 										
                                         

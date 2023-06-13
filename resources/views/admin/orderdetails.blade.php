@@ -1,8 +1,25 @@
 @extends('admin.includes.master')
 @section('main-content')  
+
+
 					<div class="top-bar p-3">
 					<h4><strong>Dashboard</strong> Order Details</h4>
 					</div>	
+					<!-- for searching -->
+				<div class="row">
+					<div class="col-md-3 my-auto">
+						<form role = "search" method="GET" action="">
+							<div class="input-group">
+							<input type="search" name="search" placeholder="Search by the name/email" class="form-control">
+							<button class="btn bg-info " type="submit">
+							Search
+							</button>
+
+							</div>
+						</form>
+					</div>
+					
+				</div>	
 					
 					<div class="card-body">
                             <div class="border p-4 rounded">
@@ -19,7 +36,7 @@
 										</tr>
 									</thead>
 								<tbody>
-								@foreach($orders->sortByDesc('created_at') as $order)
+								@foreach($orders as $order)
 									<tr>
 										<td>{{ $order->user->name }}</td>
 										<td>

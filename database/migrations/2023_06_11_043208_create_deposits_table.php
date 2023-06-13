@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('amount');
+            $table->string('month');
             $table->timestamps();
         });
     }
