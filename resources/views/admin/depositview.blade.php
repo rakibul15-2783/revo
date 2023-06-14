@@ -49,24 +49,19 @@
 										<td>
 											{{ $deposit->month}}	
 										</td>
-										
-                                        
-										<td>{{ $deposit->created_at->format('F j, Y, g:i A') }}</td>
-	
+										<td>{{ $deposit->created_at->format('Y-m-d') }}</td>
 									</tr>
 									@endforeach
 								</tbody>
-                                
 								</table>
-								
 							</div>
-</div>
-</div>
-{{ $deposits->links() }}
-</div>
+					</div>
+					</div>
+			{{ $deposits->links() }}
+			</div>
 
 </div>
-				           		
+				           		<!-- javascript search but didn't apply in this blade -->
 							<script>
 								function searchFunction(){
 									let filter = document.getElementById('myInput').value.toUpperCase();

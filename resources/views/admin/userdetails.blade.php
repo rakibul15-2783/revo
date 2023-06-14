@@ -6,13 +6,21 @@
 				</div>		 
 				<!-- for name and email searching -->
 				<div class="row">
-					<div class="col-md-3 my-auto">
+					<div class="col-md-9 my-auto">
 						<form role = "search" method="GET" action="">
 							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the name/email" class="form-control">
+							<input type="search" name="search" value="{{ $searchQuery }}" placeholder="Search here" class="form-control">
+							<select name="searchbyrole" class="form-control">
+										<option value="">Search by Role</option>
+										<option value="1" @if ($searchQueryByRole == '1') selected @endif>User</option>
+										<option value="2" @if ($searchQueryByRole == '2') selected @endif>Admin</option>
+							</select>
 							<button class="btn bg-info " type="submit">
 							Search
 							</button>
+							@if ($searchQuery || $searchQueryByRole )
+										<a class="text-danger btn "  href="{{ route('userdetails') }}"><i class="fa-solid fa-xmark fa-lg"></i></a>
+							@endif
 
 							</div>
 						</form>

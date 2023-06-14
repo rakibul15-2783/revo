@@ -8,62 +8,26 @@ use Carbon\Carbon;
 					<h4><strong>Dashboard</strong> Order Details</h4>
 					</div>	
 					
-				<div class="row">
-					<!-- for email and name searching -->
-					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="">
-							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the name/email" class="form-control" value="{{ $searchQuery}}">
-							<button class="btn bg-info search-btn" type="submit">
-							Search
-							</button>
-
-							</div>
-						</form>
-					</div>
-					<!-- for order searching -->
-					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="">
-							<div class="input-group">
-							<input type="search" name="searchbyorder" placeholder="Search by order" value="{{ $searchQueryByOrder}}" class="form-control">
-							<button class="btn bg-info search-btn" type="submit">
-							Search
-							</button>
-
-							</div>
-						</form>
-					</div>
-					<!-- for progress searching -->
-					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="">
-							<div class="input-group">
-							<input type="search" name="searchbyprogress" placeholder="Search by Progress" value="{{ $searchQueryByProgress}}" class="form-control">
-							<button class="btn bg-info search-btn" type="submit">
-							Search
-							</button>
-
-							</div>
-						</form>
-					</div>
-					<!-- for date searching -->
-					<div class="col-md-3 my-auto">
-						<form role = "search" method="GET" action="">
-							<div class="input-group">
-							<input type="search" name="searchbydate" placeholder="Search by Date" value="{{ $searchQueryByDate}}" class="form-control">
-							<button class="btn bg-info search-btn" type="submit">
-							Search
-							</button>
-
-							</div>
-						</form>
-					</div>
-					
-				</div>
 					<div class="row">
-						<div class="col">
-						<a href="{{ route('orderdetails') }}" class="btn bg-danger cancel-search m-2 text-dark"  type="submit">Cancel Search</a>
-						</div>
+						<div class="col-md-9 my-auto">
+							<form role="search" method="GET" action="">
+								<div class="input-group">
+									
+									<input type="search" name="search" placeholder="Search here..." class="form-control" value="{{ $searchQuery }}">
+									<select name="searchbyprogress" class="form-control">
+										<option value="">Search by Progress</option>
+										<option value="2" @if ($searchQueryByProgress == '2') selected @endif>Accept</option>
+										<option value="1" @if ($searchQueryByProgress == '1') selected @endif>Processing</option>
+									</select>
+									<input type="text" value="{{ $dateRange }}" name="daterange"/>
+									<button type="submit" class="btn bg-info search-btn">Search</button>
+									@if ($searchQuery || $searchQueryByProgress || $dateRange)
+										<a class="text-danger btn "  href="{{ route('orderdetails') }}"><i class="fa-solid fa-xmark fa-lg"></i></a>
+									@endif
+								</div>
+							</form>
 							
+						</div>
 					</div>
 					
 					<div class="card-body">
@@ -117,10 +81,12 @@ use Carbon\Carbon;
 					{{ $orders->appends(request()->except('page'))->links() }}
 					
 				</div>
-				            <!-- jQuery cdn -->
-								<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>			</div>
-			<!-- jQuery for accept order -->
-			<script>
+				</div>
+		
+@endsection
+@section('js')
+<!-- jQuery for accept order -->
+		<script>
 				jQuery(document).ready(function(){
 					jQuery(document).on("click",".btn-order-process",function(){
 						var id = jQuery(this).val();
@@ -134,6 +100,30 @@ use Carbon\Carbon;
 					});
 					
 				});
+		</script>
+
+			<!-- Date range picker -->
+			<script>
+				
+					$(function() {
+						$('input[name="daterange"]').daterangepicker({
+							opens: 'left',
+							autoUpdateInput: false // Disable auto-update of the input value
+						}, function(start, end, label) {
+							console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+						});
+
+						// Handle the apply button click event
+						$('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+							// Update the input value with the selected date range
+							$(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+						});
+
+						// Handle the cancel button click event
+						$('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+							// Clear the input value when canceled
+							$(this).val('');
+						});
+					});
 			</script>	
-			
 @endsection

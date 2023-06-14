@@ -42,35 +42,46 @@ class AdminController extends Controller
         $searchQuery = $request->input('search');
         $searchQueryByOrder = $request->input('searchbyorder');
         $searchQueryByProgress = $request->input('searchbyprogress');
-        $searchQueryByDate = $request->input('searchbydate');
+                             //date range picker search
+        $dateRange = $request->input('daterange');
 
         $query = Order::query()->orderByDesc('date');
 
+                     //name/email/ search
         if (!is_null($searchQuery)) {
             $searchQuery = trim($searchQuery);
             $query->whereHas('user', function ($query) use ($searchQuery) {
                 $query->where('name', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
-            });
+                    
+            })->orWhere('Item', 'LIKE', '%' . $searchQuery . '%');
         }
+                         //order search
         if (!is_null($searchQueryByOrder)) {
             $searchQueryByOrder = trim($searchQueryByOrder);
             $query->where('Item','LIKE', '%'.$searchQueryByOrder.'%');
         }
+
+                     //accept or processing search
         if (!is_null($searchQueryByProgress)) {
-            $searchQueryByProgress = trim($searchQueryByProgress);
-            if ($searchQueryByProgress == "active" || $searchQueryByProgress == "Active") {
-                $searchQueryByProgress = 2;
-                $query->where('action', $searchQueryByProgress);
-            } elseif ($searchQueryByProgress == "Processing" || $searchQueryByProgress == "processing") {
-                $searchQueryByProgress = 1;
-                $query->where('action', $searchQueryByProgress);
+            $searchQueryByProgressValue = intval($searchQueryByProgress);
+            if ($searchQueryByProgressValue == 2) {
+                $query->where('action', 2);
+            } elseif ($searchQueryByProgressValue == 1) {
+                $query->where('action', 1);
             }
-            
         }
-        if (!is_null($searchQueryByDate)) {
-            $searchQueryByDate = trim($searchQueryByDate);
-            $query->where('date','LIKE', '%'.$searchQueryByDate.'%');
+                      //date range picker search
+        if (!is_null($dateRange)) {
+            // Extract start and end dates from the date range string
+            list($startDate, $endDate) = explode(' - ', $dateRange);
+    
+            // Parse the dates
+            $startDate = Carbon::createFromFormat('m/d/Y', $startDate)->startOfDay();
+            $endDate = Carbon::createFromFormat('m/d/Y', $endDate)->endOfDay();
+    
+            // Filter the orders within the date range
+            $query->whereBetween('date', [$startDate, $endDate]);
         }
     
         $orders = $query->paginate(8);
@@ -78,14 +89,14 @@ class AdminController extends Controller
             'search' => $searchQuery,
             'searchbyorder' => $searchQueryByOrder,
             'searchbyprogress' => $searchQueryByProgress,
-            'searchbydate' => $searchQueryByDate,
-        ]);;
+            'dateRange' => $dateRange,
+        ]);
         return view('admin.orderdetails', compact(
             'orders',
             'searchQuery',
             'searchQueryByOrder',
             'searchQueryByProgress',
-            'searchQueryByDate'
+            'dateRange'
         ));
     }
 
@@ -93,7 +104,8 @@ class AdminController extends Controller
     public function userdetails(Request $request){
 
 
-        $searchQuery = $request->search;
+        $searchQuery = $request->input('search');
+        $searchQueryByRole = $request->input('searchbyrole');
 
         $query = User::orderBy('id','desc');
 
@@ -101,12 +113,26 @@ class AdminController extends Controller
         
         {
             $searchQuery = trim($searchQuery);
-            $query->where('name','LIKE', '%'.$searchQuery.'%')->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
+            $query->where('name','LIKE', '%'.$searchQuery.'%')
+                  ->orWhere('phone', 'LIKE', '%' . $searchQuery . '%');
+        }
+        if (!is_null($searchQueryByRole)) {
+            $searchQueryByRole = intval($searchQueryByRole);
+            if ($searchQueryByRole == 1) {
+                $query->where('role', 1);
+            } elseif ($searchQueryByRole == 2) {
+                $query->where('role', 2);
+            }
         }
 
         $users =  $query->paginate(4);
-
-        return view('admin.userdetails',compact('users'));
+        $users->appends($request->except('page'))->appends([
+            'search' => $searchQuery,
+            'searchbyrole' => $searchQueryByRole
+                ]);
+        return view('admin.userdetails',compact(
+            'users','searchQuery','searchQueryByRole'
+        ));
     }
 
 

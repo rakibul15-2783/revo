@@ -1,8 +1,10 @@
 
 @extends('admin.includes.master')
 @section('main-content')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-                    <div class="top-bar p-3">
+
+
+                  
+<div class="top-bar p-3">
 					<h4><strong>Dashboard</strong> Make Order</h4>
 					</div>	
 
@@ -65,12 +67,22 @@
 								</div>
 							</div>
 						</div>
+		
 
+@endsection
+
+@section('js')
+
+	<!-- select 2 -->
+			
 						<script>
 							$(document).ready(function() {
 								$('.select-user-for-order').select2();
 							});
+
+							console.log($('.select-user-for-order'))
 						</script>
+						
  <!-- don't make todays order when it past 5.00 pm and previous days -->
 <script>
 	var date = new Date;
@@ -122,5 +134,4 @@
 	}
 	
 </script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
