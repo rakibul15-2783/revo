@@ -37,67 +37,68 @@ class AdminController extends Controller
     
     }
 
-                                          //order details
+                                    //order details
     public function orderdetails(Request $request){
-        $searchQuery = $request->input('search');
-        $searchQueryByOrder = $request->input('searchbyorder');
+        
         $searchQueryByProgress = $request->input('searchbyprogress');
-                             //date range picker search
+        $searchQuery = $request->input('search');
         $dateRange = $request->input('daterange');
-
         $query = Order::query()->orderByDesc('date');
 
-                     //name/email/ search
-        if (!is_null($searchQuery)) {
-            $searchQuery = trim($searchQuery);
-            $query->whereHas('user', function ($query) use ($searchQuery) {
-                $query->where('name', 'LIKE', '%' . $searchQuery . '%')
-                    ->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
-                    
-            })->orWhere('Item', 'LIKE', '%' . $searchQuery . '%');
-        }
-                         //order search
-        if (!is_null($searchQueryByOrder)) {
-            $searchQueryByOrder = trim($searchQueryByOrder);
-            $query->where('Item','LIKE', '%'.$searchQueryByOrder.'%');
-        }
+                    //accept or processing search
+        
+                    if (!is_null($searchQueryByProgress)) {
+                        $searchQueryByProgressValue = intval($searchQueryByProgress);
+                        if ($searchQueryByProgressValue == 2) {
+                            $query->where('action', 2);
+                        } elseif ($searchQueryByProgressValue == 1) {
+                            $query->where('action', 1);
+                        }
+                    }
 
-                     //accept or processing search
-        if (!is_null($searchQueryByProgress)) {
-            $searchQueryByProgressValue = intval($searchQueryByProgress);
-            if ($searchQueryByProgressValue == 2) {
-                $query->where('action', 2);
-            } elseif ($searchQueryByProgressValue == 1) {
-                $query->where('action', 1);
-            }
-        }
+                     //name/email/order search
+        
+                    if (!is_null($searchQuery)) {
+                        $searchQuery = trim($searchQuery);
+                        $query->where(function ($query) use ($searchQuery) {
+                            $query->whereHas('user', function ($query) use ($searchQuery) {
+                                $query->where('name', 'LIKE', '%' . $searchQuery . '%')
+                                    ->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
+                                    
+                            })->orWhere('Item', 'LIKE', '%' . $searchQuery . '%');
+
+                        });
+                        
+                    }
+                    
+
+         
                       //date range picker search
-        if (!is_null($dateRange)) {
-            // Extract start and end dates from the date range string
-            list($startDate, $endDate) = explode(' - ', $dateRange);
+        
+                    if (!is_null($dateRange)) {
+                        // Extract start and end dates from the date range string
+                        list($startDate, $endDate) = explode(' - ', $dateRange);
+                
+                        // Parse the dates
+                        $startDate = Carbon::createFromFormat('m/d/Y', $startDate)->startOfDay();
+                        $endDate = Carbon::createFromFormat('m/d/Y', $endDate)->endOfDay();
+                
+                        // Filter the orders within the date range
+                        $query->whereBetween('date', [$startDate, $endDate]);
+                    }
     
-            // Parse the dates
-            $startDate = Carbon::createFromFormat('m/d/Y', $startDate)->startOfDay();
-            $endDate = Carbon::createFromFormat('m/d/Y', $endDate)->endOfDay();
-    
-            // Filter the orders within the date range
-            $query->whereBetween('date', [$startDate, $endDate]);
-        }
-    
-        $orders = $query->paginate(8);
-        $orders->appends($request->except('page'))->appends([
-            'search' => $searchQuery,
-            'searchbyorder' => $searchQueryByOrder,
-            'searchbyprogress' => $searchQueryByProgress,
-            'dateRange' => $dateRange,
-        ]);
-        return view('admin.orderdetails', compact(
-            'orders',
-            'searchQuery',
-            'searchQueryByOrder',
-            'searchQueryByProgress',
-            'dateRange'
-        ));
+                        $orders = $query->paginate(8);
+                        $orders->appends($request->except('page'))->appends([
+                            'search' => $searchQuery,
+                            'searchbyprogress' => $searchQueryByProgress,
+                            'dateRange' => $dateRange,
+                        ]);
+                        return view('admin.orderdetails', compact(
+                            'orders',
+                            'searchQuery',
+                            'searchQueryByProgress',
+                            'dateRange'
+                        ));
     }
 
                                                 //user info
@@ -234,11 +235,15 @@ class AdminController extends Controller
             $query->whereHas('user', function ($query) use ($searchQuery) {
                 $query->where('name', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('email', 'LIKE', '%' . $searchQuery . '%');
-            });
+            })->orWhere('amount', 'LIKE', '%' . $searchQuery . '%');;
         }
+        
     
         $deposits = $query->paginate(8);
-        return view('admin.depositview',compact('deposits'));
+        $deposits->appends($request->except('page'))->appends([
+            'search' => $searchQuery,
+                ]);
+        return view('admin.depositview',compact('deposits','searchQuery'));
     }
     
    

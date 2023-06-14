@@ -13,14 +13,15 @@ use Carbon\Carbon;
 							<form role="search" method="GET" action="">
 								<div class="input-group">
 									
-									<input type="search" name="search" placeholder="Search here..." class="form-control" value="{{ $searchQuery }}">
+									<input type="search" name="search" placeholder="Search name/email/phone/order" class="form-control" value="{{ $searchQuery }}">
 									<select name="searchbyprogress" class="form-control">
 										<option value="">Search by Progress</option>
 										<option value="2" @if ($searchQueryByProgress == '2') selected @endif>Accept</option>
 										<option value="1" @if ($searchQueryByProgress == '1') selected @endif>Processing</option>
 									</select>
-									<input type="text" value="{{ $dateRange }}" name="daterange"/>
+									<input type="text" placeholder="Choose Date" value="{{ $dateRange }}" name="daterange"/>
 									<button type="submit" class="btn bg-info search-btn">Search</button>
+									<!-- if get search then visualize cancel button -->
 									@if ($searchQuery || $searchQueryByProgress || $dateRange)
 										<a class="text-danger btn "  href="{{ route('orderdetails') }}"><i class="fa-solid fa-xmark fa-lg"></i></a>
 									@endif

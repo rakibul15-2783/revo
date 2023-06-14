@@ -8,11 +8,13 @@
 					<div class="col-md-3 my-auto">
 						<form role = "search" method="GET" action="">
 							<div class="input-group">
-							<input type="search" name="search" placeholder="Search by the name/email" class="form-control">
+							<input type="search" name="search" value="{{ $searchQuery }}" placeholder="Search by name/email/amount" class="form-control">
 							<button class="btn bg-info " type="submit">
 							Search
 							</button>
-
+							@if ($searchQuery)
+									<a class="text-danger btn "  href="{{ route('depositview') }}"><i class="fa-solid fa-xmark fa-lg"></i></a>
+							@endif
 							</div>
 						</form>
 					</div>	
