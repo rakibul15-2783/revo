@@ -10,7 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +37,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
- 
+
     /**
      * The attributes that should be cast.
      *
@@ -48,7 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    public function deposits(){
+    public function deposits()
+    {
         return $this->hasMany(Deposit::class);
     }
 }

@@ -13,7 +13,8 @@ class Deposit extends Model
         'user_id','amount','month'
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

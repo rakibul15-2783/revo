@@ -16,13 +16,12 @@ class RoleManager
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user()->role == 2){
+        if($request->user()->role == 2) {
             return $next($request);
-        }
-        elseif($request->user()->role == 0){
+        } elseif($request->user()->role == 0) {
             return $next($request);
         }
         return redirect('goback');
-        
+
     }
 }

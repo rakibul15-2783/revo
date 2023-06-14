@@ -1,7 +1,7 @@
 
 <nav id="sidebar" class="sidebar">
             <div class="sidebar-content js-simplebar">
-               <a class="sidebar-brand" href="index.html">
+               <a class="sidebar-brand" href="{{ route('adminprofile') }}">
                <img src="{{ asset('admin') }}/assets/img/logo-white.png" height="50px" alt="Revo Interactive">
                </a>
                <ul class="sidebar-nav">
