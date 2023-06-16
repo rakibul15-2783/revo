@@ -5,7 +5,7 @@ use Carbon\Carbon;
 ?>
 
 					<div class="top-bar p-3">
-					<h4><strong>Dashboard</strong> Order Details</h4>
+					<h4><strong>Dashboard</strong> Order Details</h4> 
 					</div>	
 					
 					<div class="row">
@@ -47,7 +47,7 @@ use Carbon\Carbon;
 											<th style="width:25%">Action</th>
 										</tr>
 									</thead>
-								<tbody>
+								<tbody class="orderdata">
 								@foreach($orders as $order)
 									<tr>
 										<td>{{ $order->user->name }}</td>
@@ -87,20 +87,64 @@ use Carbon\Carbon;
 @endsection
 @section('js')
 <!-- jQuery for accept order -->
-		<script>
-				jQuery(document).ready(function(){
-					jQuery(document).on("click",".btn-order-process",function(){
+<script>
+				jQuery(document).ready(function() {
+					show();
+					jQuery(document).on("click", ".btn-order-process", function() {
 						var id = jQuery(this).val();
 						jQuery.ajax({
-							url: "orderaccept/" + id,
-							type: "get",
-							success: function(res){
-								alert(res.msg);
-							}
+						url: "orderaccept/" + id,
+						type: "get",
+						success: function(res) {
+							alert(res.msg);
+							show();
+						}
 						});
 					});
+					// Define the show function
+					function show() {
+						jQuery.ajax({
+						url: "/orderdetails/show",
+						type: "get",
+						dataType: "json",
+						success: function(res) {
+							var alldata = "";
+
+							jQuery.each(res.data, function(key, val) {
+							var actionButton = '';
+							if (val.action == 1) {
+								actionButton = '<button value="' + val.id + '" class="btn btn-sm btn-warning btn-order-process">Processing</button>';
+							} else {
+								actionButton = '<a href="#" class="btn btn-sm btn-success">Accept</a>';
+							}
+
+							alldata += '<tr>\
+								<td>' + val.user.name + '</td>\
+								<td>' + val.date + '</td>\
+								<td>' + moment(val.date).format("dddd") + '</td>\
+								<td>' + val.Item + '</td>\
+								<td>' + actionButton + '</td>\
+								<td>\
+								<a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 align-middle"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>\
+								<a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>\
+								</td>\
+							</tr>';
+							});
+
+							// Append the new data to the existing table body
+							jQuery(".orderdata").append(alldata);
+						}
+						});
+					}
+
+					// Call the show function initially to display the existing data
+					//show();
+
+					// Add event listeners for dynamic buttons
 					
-				});
+					});
+					
+			
 		</script>
 
 			<!-- Date range picker -->

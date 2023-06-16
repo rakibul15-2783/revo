@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Auth;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserInfoController;
+use App\Http\Controllers\Admin\OrderInfoControler;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +42,20 @@ Route::middleware('guest')->group(function(){
 Route::middleware('auth','role')->group(function () {
     Route::get('/adminprofile',[AdminController::class,'adminprofile'])->name('adminprofile');  
     Route::get('/adminlogout',[AdminController::class,'adminlogout'])->name('adminlogout');
-    Route::get('/orderdetails',[AdminController::class,'orderdetails'])->name('orderdetails');
+    //order details 
+    Route::get('/orderdetails',[OrderInfoControler::class,'index'])->name('orderdetails');
+    Route::get('/orderdetails/show',[OrderInfoControler::class,'show'])->name('orderdetails.show');
+    //
+
+     //live search userdetails
+     Route::get('/livesearchuserdetails',[UserInfoController::class,'livesearch'])->name('livesearch');
+     Route::get('/livesearchpost',[UserInfoController::class,'livesearchpost'])->name('livesearchpost');
+
+
     Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
+    //user details 2
+    Route::get('/userdetails2', [UserInfoController::class, 'index'])->name('userdetails2');
+    Route::get('/userdetails2/show', [UserInfoController::class, 'show'])->name('userdetails2.show');
     //order accept
     Route::get('/orderaccept/{id}',[AdminController::class,'orderaccept']);
     //user role change

@@ -167,6 +167,8 @@ class AdminController extends Controller
         ]);
     }
 
+    
+
                                              //user role change to admin
     public function userrolechangetoadmin($id)
     {

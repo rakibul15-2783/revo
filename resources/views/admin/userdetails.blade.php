@@ -156,25 +156,27 @@
 					});
 
 					//user role change to admin
-					jQuery(document).on("click",".btn-user-role",function(){
+					jQuery(document).on("click",".btn-user-role",function(event){
 						var id = jQuery(this).val();
 						jQuery.ajax({
 							url: "userrolechangetoadmin/" + id,
 							type: "get",
 							success: function(res){
 								alert(res.msg);
+								event.preventDefault()
 							}
 						});
 					});
 
 					//admin role change to user
-					jQuery(document).on("click",".btn-admin-role",function(){
+					jQuery(document).on("click",".btn-admin-role",function(event){
 						var id = jQuery(this).val();
 						jQuery.ajax({
 							url: "adminrolechangetouser/" + id,
 							type: "get",
 							success: function(res){
 								alert(res.msg);
+								event.preventDefault()
 							}
 						});
 					});
