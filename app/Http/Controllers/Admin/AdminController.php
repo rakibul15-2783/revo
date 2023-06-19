@@ -193,10 +193,20 @@ class AdminController extends Controller
     public function userdelete($id)
     {
         $user = User::find($id);
-        $user->delete();
-        return response()->json([
-            "msg" => "User/Admin Deleted"
-        ]);
+        if ($user) {
+            // Delete associated deposits
+            $user->deposits()->delete();
+    
+            // Delete associated orders
+            $user->orders()->delete();
+    
+            // Delete the user record
+            $user->delete();
+    
+            return response()->json([
+                "msg" => "User/Admin and associated records deleted successfully."
+            ]);
+        }
     }
                                     //make a order
     public function makeorder()

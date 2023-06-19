@@ -15,24 +15,9 @@
     <a href="{{ route('register') }}" class="btn btn-info">Register</a>
 
 
-        <select class="js-example-basic-single" name="state">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-            <option value="WY">Rakib</option>
-            <option value="WY">Robin</option>
-            <option value="WY">Siam</option>
-        </select>
-       
-
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-        tags: true
-    });
-</script>
 
 </body>
 </html>

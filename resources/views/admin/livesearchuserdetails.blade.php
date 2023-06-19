@@ -9,7 +9,7 @@
     <div class="col-md-9 my-auto">
         <div class="input-group">
             <input type="search" name="search" id="searchQuery"  placeholder="Search here" class="form-control">
-            <select name="searchbyrole" class="form-control">
+            <select name="searchbyrole" id="searchbyrole" class="form-control">
                 <option value="">Search by Role</option>
                 <option value="1" >User</option>
                 <option value="2" >Admin</option>
@@ -160,6 +160,21 @@
                     }
                 });
                 
+            });
+            //search by role
+            $('#searchbyrole').on('change', function() {
+                var selectedValue = $(this).val();
+                
+                $.ajax({
+                url: '/livesearch/userdetails', 
+                type: 'get',
+                data: {
+                    'search': selectedValue
+                },
+                success: function(res) {
+                    $('#content').html(res);
+                }
+                });
             });
            
 

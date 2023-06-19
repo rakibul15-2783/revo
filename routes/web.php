@@ -48,7 +48,7 @@ Route::middleware('auth','role')->group(function () {
     //
 
      //live search userdetails
-     Route::get('/livesearchuserdetails',[UserInfoController::class,'livesearch'])->name('livesearch');
+     Route::get('/livesearch/userdetails',[UserInfoController::class,'livesearch'])->name('livesearch');
      Route::get('/livesearchpost',[UserInfoController::class,'livesearchpost'])->name('livesearchpost');
 
 

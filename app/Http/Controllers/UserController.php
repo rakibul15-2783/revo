@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
-
-use Mail;
+use App\Jobs\EmailSendJob;
 
 class UserController extends Controller
 {
@@ -56,10 +54,9 @@ class UserController extends Controller
         //registration confirmation email
 
 
-        Mail::send('email', [], function ($messege) use ($user) {
-            $messege ->to($user->email);
-            $messege->subject("Successfully Registered");
-        });
+        $mail = $user->email;
+        $sendMail = new EmailSendJob($mail);
+        dispatch($sendMail);
 
         return view('registersuccess');
 
