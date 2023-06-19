@@ -35,5 +35,10 @@ return [
         'client_secret' => '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',
         'redirect' => 'http://127.0.0.1:8000/google/signup',
     ],
+    'facebook' => [
+        'client_id' => '830884295225570',
+        'client_secret' => '629f61b4df06fdef54ca386107fa529f',
+        'redirect' => 'http://localhost:8000/facebook/signup',
+    ],
 
 ];

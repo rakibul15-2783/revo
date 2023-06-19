@@ -143,6 +143,10 @@ return [
         // 'store'  => 'redis',
     ],
 
+    
+    'debug' => env('APP_DEBUG', true),
+
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

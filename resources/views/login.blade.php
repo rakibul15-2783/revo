@@ -57,6 +57,7 @@
                                             </div>
                                             <div class="mt-3 text-center">
                                             <a href="{{ route('google') }}" class="btn btn-lg border-white text-white w-40">Sign in with Google</a>
+                                            <a href="{{ route('facebook') }}" class="btn btn-lg border-white text-white w-40">Sign in with Facebook</a>
                                             </div>
                                         </form>
                                     </div>

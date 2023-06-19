@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
 use App\Jobs\EmailSendJob;
 use Laravel\Socialite\Facades\Socialite;
+//use Exception;
 
 class UserController extends Controller
 {
@@ -71,6 +72,7 @@ class UserController extends Controller
     public function googlesignup(){
         $socialUser = Socialite::driver('google')->user();
         $user = User::where('email', $socialUser->email)->first();
+        //dd($socialUser);
 
         if($user){
             event(new Registered($user));
@@ -97,6 +99,38 @@ class UserController extends Controller
         
 
     }
+
+    //Facebook signup
+    public function facebook(){
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function facebooksignup(){
+        $fbUser = Socialite::driver('facebook')->stateless()->user();
+        $user = User::where('f_id', $fbUser->id)->first();
+        //dd($fbUser);
+        
+        if($user){
+            event(new Registered($user));
+
+            Auth::login($user);
+            return redirect('/mainpage');
+        }
+        else{
+            $user = new User();
+            $user->name = $fbUser->name;
+            $user->f_id = $fbUser->id;
+            $user->save();
+            
+            event(new Registered($user));
+
+            Auth::login($user);
+            return redirect('/mainpage');
+        }
+        
+        
+
+    }
+    
 
          //user login
     public function login()

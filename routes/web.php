@@ -39,6 +39,9 @@ Route::middleware('guest')->group(function(){
     //google signup
     Route::get('/google',[UserController::class,'google'])->name('google');
     Route::get('/google/signup',[UserController::class,'googlesignup']);
+    //Facebook signup
+    Route::get('/facebook',[UserController::class,'facebook'])->name('facebook');
+    Route::get('/facebook/signup',[UserController::class,'facebooksignup']);
      
 });
 
