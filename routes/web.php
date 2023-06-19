@@ -35,6 +35,10 @@ Route::middleware('guest')->group(function(){
     Route::post('/loginpermission',[UserController::class,'loginpermission'])->name('loginpermission');
     Route::get('/adminlogin',[AdminController::class,'adminlogin'])->name('adminlogin');
     Route::post('/adminloginpost',[AdminController::class,'adminloginpost'])->name('adminloginpost');
+
+    //google signup
+    Route::get('/google',[UserController::class,'google'])->name('google');
+    Route::get('/google/signup',[UserController::class,'googlesignup']);
      
 });
 

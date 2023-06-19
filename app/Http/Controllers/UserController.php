@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules\Password;
 use App\Jobs\EmailSendJob;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
@@ -59,6 +61,40 @@ class UserController extends Controller
         dispatch($sendMail);
 
         return view('registersuccess');
+
+    }
+
+    //google signup
+    public function google(){
+        return Socialite::driver('google')->redirect();
+    }
+    public function googlesignup(){
+        $socialUser = Socialite::driver('google')->user();
+        $user = User::where('email', $socialUser->email)->first();
+
+        if($user){
+            event(new Registered($user));
+
+            Auth::login($user);
+            return redirect('/mainpage');
+        }
+        else{
+            $user = new User();
+            $user->name = $socialUser->name;
+            $user->email = $socialUser->email;
+            $user->username = $socialUser->email;
+            $user->save();
+
+            $mail = $user->email;
+            $sendMail = new EmailSendJob($mail);
+            dispatch($sendMail);
+            
+            event(new Registered($user));
+
+            Auth::login($user);
+            return redirect('/mainpage');
+        }
+        
 
     }
 

@@ -91,6 +91,7 @@
 										<div class="col-sm-9">
 											<button type="submit" name="submit" class="submit btn btn-info px-5">Register</button>
 											<a href="{{ route('login') }}" class=" btn btn-info px-5">Login here</a>
+											<a href="{{ route('google') }}" class=" btn btn-info px-5">Signup with Google</a>
 										</div>
 									</div>
                                     </form>

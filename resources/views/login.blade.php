@@ -27,6 +27,7 @@
                                 <div class="col-lg-6">
                                     <div class="auth-form pl-lg-5 pr-lg-5">
                                         <h1 class="text-white mb-4"><strong>Welcome!</strong></h1>
+                                       
                                         <form action="{{ route('loginpermission') }}" method="POST">
                                             @csrf
                                             <div class="mb-3">
@@ -53,6 +54,9 @@
                                             <div class="mt-3">
                                                 <button type="submit" class="btn btn-lg btn-warning w-50 mr-2 border-warning">Sign In</button>
                                                 <a href="{{ route('register') }}" class="btn btn-lg border-white text-white w-40">Sign Up</a>
+                                            </div>
+                                            <div class="mt-3 text-center">
+                                            <a href="{{ route('google') }}" class="btn btn-lg border-white text-white w-40">Sign in with Google</a>
                                             </div>
                                         </form>
                                     </div>

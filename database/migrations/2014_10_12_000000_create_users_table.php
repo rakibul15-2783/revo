@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->integer('role')->default('1')->comment('0 for superadmin 1 for user 2 for admin');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

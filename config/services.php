@@ -30,5 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'client_id' => '684623105804-308j93qjnmig2unbv9bgkig09j1ohqba.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://127.0.0.1:8000/google/signup',
+    ],
 
 ];
