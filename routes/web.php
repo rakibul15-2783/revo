@@ -20,14 +20,14 @@ use App\Http\Controllers\Admin\OrderInfoControler;
 
 //user control
 Route::middleware('auth')->group(function () {
-    Route::get('/mainpage',[UserController::class,'mainpage'])->name('mainpage');
+    Route::get('/dashboard',[UserController::class,'mainpage'])->name('mainpage');
     Route::get('/order',[UserController::class,'order'])->name('order');
     Route::post('/ordersuccess',[UserController::class,'ordersuccess'])->name('ordersuccess');
     Route::get('/seeorder',[UserController::class,'seeorder'])->name('seeorder');
     Route::get('/logout',[UserController::class,'logout'])->name('logout');
-    
+
 });
- 
+
 Route::middleware('guest')->group(function(){
     Route::get('/register',[UserController::class,'register'])->name('register');
     Route::get('/login',[UserController::class,'login'])->name('login');
@@ -42,14 +42,14 @@ Route::middleware('guest')->group(function(){
     //Facebook signup
     Route::get('/facebook',[UserController::class,'facebook'])->name('facebook');
     Route::get('/facebook/signup',[UserController::class,'facebooksignup']);
-     
+
 });
 
 //admin controll
 Route::middleware('auth','role')->group(function () {
-    Route::get('/adminprofile',[AdminController::class,'adminprofile'])->name('adminprofile');  
+    Route::get('/adminprofile',[AdminController::class,'adminprofile'])->name('adminprofile');
     Route::get('/adminlogout',[AdminController::class,'adminlogout'])->name('adminlogout');
-    //order details 
+    //order details
     Route::get('/orderdetails',[OrderInfoControler::class,'index'])->name('orderdetails');
     Route::get('/orderdetails/show',[OrderInfoControler::class,'show'])->name('orderdetails.show');
     //
@@ -85,8 +85,8 @@ Route::middleware('auth','role')->group(function () {
     Route::get('/searchuser',[AdminController::class,'searchuser'])->name('searchuser');
     //Search user by email
     Route::get('/searchuserbyemail',[AdminController::class,'searchuserbyemail'])->name('searchuserbyemail');
-    
-    
+
+
 });
 
 Route::get('/goback',[AdminController::class,'goback'])->name('goback');
@@ -94,6 +94,6 @@ Route::get('/goback',[AdminController::class,'goback'])->name('goback');
 
 
 Route::get('/', function () {
-    
+
     return view('welcome');
 });

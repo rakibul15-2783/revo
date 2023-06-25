@@ -24,43 +24,43 @@
                                 <div class="col-lg-6 bg-white h-100 p-4 d-none d-lg-block">
                                     <img class="w-100" src="{{ asset('admin') }}/assets/img/login.png" alt="Revo Login Page">
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="auth-form pl-lg-5 pr-lg-5">
-                                        <h1 class="text-white mb-4"><strong>Welcome!</strong></h1>
-                                       
-                                        <form action="{{ route('loginpermission') }}" method="POST">
-                                            @csrf
-                                            <div class="mb-3">
-                                                <label class="form-label text-white">Email</label>
-                                                <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email"> @error('email')
-                                                <span class="text-danger">{{ $message }}</span> @enderror
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label text-white">Password</label>
-                                                <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password"> @error('password')
-                                                <span class="text-danger">{{ $message }}</span> @enderror
-                                                <small>
-                                                    <a class="text-white" href="">Forgot password?</a>
-                                                </small>
-                                            </div>
-                                            <div>
-                                                <label class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="remember-me" name="remember-me">
-                                                    <span class="form-check-label text-white">
+                                <div class="auth-form pl-lg-5 pr-lg-5">
+                                    <h1 class="text-white mb-4"><strong>Welcome!</strong></h1>
+
+                                    <form action="{{ route('loginpermission') }}" method="POST">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label class="form-label text-white">Email</label>
+                                            <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email"> @error('email')
+                                            <span class="text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label text-white">Password</label>
+                                            <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password"> @error('password')
+                                            <span class="text-danger">{{ $message }}</span> @enderror
+                                            <small>
+                                                <a class="text-white" href="">Forgot password?</a>
+                                            </small>
+                                        </div>
+                                        <div>
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="remember-me" name="remember-me">
+                                                <span class="form-check-label text-white">
                                                         Remember me
                                                     </span>
-                                                </label>
-                                            </div>
-                                            <div class="mt-3">
-                                                <button type="submit" class="btn btn-lg btn-warning w-50 mr-2 border-warning">Sign In</button>
-                                                <a href="{{ route('register') }}" class="btn btn-lg border-white text-white w-40">Sign Up</a>
-                                            </div>
-                                            <div class="mt-3 text-center">
+                                            </label>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-lg btn-warning w-50 mr-2 border-warning">Sign In</button>
+                                            <a href="{{ route('register') }}" class="btn btn-lg border-white text-white w-40">Sign Up</a>
+                                        </div>
+                                        <div class="mt-3 text-center">
                                             <a href="{{ route('google') }}" class="btn btn-lg border-white text-white w-40">Sign in with Google</a>
                                             <a href="{{ route('facebook') }}" class="btn btn-lg border-white text-white w-40">Sign in with Facebook</a>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-6">
                                 </div>
                             </div>
                         </div>
