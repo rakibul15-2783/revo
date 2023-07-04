@@ -1,13 +1,13 @@
 @extends('admin.includes.master')
 @section('main-content')
                     <div class="top-bar p-3">
-					<h4><strong>Dashboard</strong> Deposit</h4>
-					</div>	
-				
+					<h4><strong>Deposit</strong> </h4>
+					</div>
+
 					<div class="col-xl-6 mx-auto p-4">
 							<div class="card-body">
                             <div class="border p-4 rounded">
-								
+
                                     <form  action="{{ route('depositpost') }}" method="POST">
                                        @csrf
                                        <div class="row mb-3">
@@ -16,16 +16,16 @@
 										<select class="js-example-basic-single form-control" required name="username">
 										<option value="">Select User</option>
 											 @foreach($users as $user)
-												
+
 												<option value="{{$user->username}}">{{$user->username}}</option>
 												@endforeach
 										</select>
-											
+
                                              @error('username')
                                               <span class="text-danger">{{ $message }}</span>
                                              @enderror
                                         </div>
-                                        
+
 									</div>
                                        <div class="row mb-3">
 										<label for="month" class=" col-sm-3 col-form-label ">Month</label>
@@ -48,9 +48,9 @@
 											@error('month')
                                               <span class="text-danger">{{ $message }}</span>
                                              @enderror
-											
+
                                         </div>
-                                        
+
 									</div>
 
 									<div class="row mb-3">
@@ -66,22 +66,22 @@
 										<label class="col-sm-3 col-form-label"></label>
 										<div class="col-sm-9">
 											<button type="submit" name="submit" class="submit btn btn-info px-5">Deposit</button>
-											
+
 										</div>
 									</div>
 
 									<div id="errorMessage" class="mt-3 alert alert-danger fade" role="alert"></div>
 
                                     </form>
-                        
+
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-                
-                
+
+
 
 @endsection
 

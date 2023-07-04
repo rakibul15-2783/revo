@@ -12,7 +12,7 @@
                      <a href="{{ route('adminprofile') }}"  class="sidebar-link collapsed">
                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                      </a>
-                     <a href="{{ route('userdetails') }}"  class="sidebar-link collapsed">
+                     <a href="{{ route('userdetails2') }}"  class="sidebar-link collapsed">
                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Details</span>
                      </a>
                      <a href="{{ route('orderdetails') }}"  class="sidebar-link collapsed">
@@ -27,9 +27,8 @@
                      <a href="{{ route('depositview') }}"  class="sidebar-link collapsed">
                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">View Amount</span>
                      </a>
-                     
-                  </li>  
+
+                  </li>
                </ul>
             </div>
          </nav>
-         

@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\OrderInfoControler;
 
 //user control
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard',[UserController::class,'mainpage'])->name('mainpage');
+    Route::get('/dashboard',[UserController::class,'dashboard'])->name('dashboard');
     Route::get('/order',[UserController::class,'order'])->name('order');
     Route::post('/ordersuccess',[UserController::class,'ordersuccess'])->name('ordersuccess');
     Route::get('/seeorder',[UserController::class,'seeorder'])->name('seeorder');
@@ -47,7 +47,7 @@ Route::middleware('guest')->group(function(){
 
 //admin controll
 Route::middleware('auth','role')->group(function () {
-    Route::get('/adminprofile',[AdminController::class,'adminprofile'])->name('adminprofile');
+    Route::get('/admin/dashboard',[AdminController::class,'adminprofile'])->name('adminprofile');
     Route::get('/adminlogout',[AdminController::class,'adminlogout'])->name('adminlogout');
     //order details
     Route::get('/orderdetails',[OrderInfoControler::class,'index'])->name('orderdetails');
@@ -59,7 +59,7 @@ Route::middleware('auth','role')->group(function () {
      Route::get('/livesearchpost',[UserInfoController::class,'livesearchpost'])->name('livesearchpost');
 
 
-    Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
+    //Route::get('/userdetails',[AdminController::class,'userdetails'])->name('userdetails');
     //user details 2
     Route::get('/userdetails2', [UserInfoController::class, 'index'])->name('userdetails2');
     Route::get('/userdetails2/show', [UserInfoController::class, 'show'])->name('userdetails2.show');

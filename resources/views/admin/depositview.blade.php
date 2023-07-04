@@ -1,8 +1,8 @@
 @extends('admin.includes.master')
-@section('main-content')  
+@section('main-content')
 					<div class="top-bar p-3">
-					<h4><strong>Dashboard</strong> View Amount</h4>
-					</div>	
+					<h4><strong>View Amount</strong> </h4>
+					</div>
 					<!-- for searching -->
 				<div class="row">
 					<div class="col-md-3 my-auto">
@@ -17,21 +17,21 @@
 							@endif
 							</div>
 						</form>
-					</div>	
-					
-				</div>	
+					</div>
 
-					
+				</div>
+
+
 					<div class="card-body">
                             <div class="border p-4 rounded">
-							
-					
+
+
                             <div class="table-responsive">
 							<table id="myTable" class="table table-striped table-bordered" style="width:100%">
-							
+
 							<div class="card">
 							<table class="table table-striped">
-								
+
 									<thead>
 										<tr>
 											<th style=" width:40%;">Name</th>
@@ -44,12 +44,12 @@
 								@foreach($deposits as $deposit)
 									<tr>
 										<td>{{ $deposit->user->name }}</td>
-										
+
 										<td>
-											{{ $deposit->amount }}	
+											{{ $deposit->amount }}
 										</td>
 										<td>
-											{{ $deposit->month}}	
+											{{ $deposit->month}}
 										</td>
 										<td>{{ $deposit->created_at->format('Y-m-d') }}</td>
 									</tr>
@@ -82,7 +82,7 @@
 										}
 									}
 								}
-							</script>	
-												
-			
+							</script>
+
+
 @endsection

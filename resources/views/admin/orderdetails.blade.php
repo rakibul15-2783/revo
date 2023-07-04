@@ -1,18 +1,18 @@
 @extends('admin.includes.master')
-@section('main-content')  
+@section('main-content')
 <?php
 use Carbon\Carbon;
 ?>
 
 					<div class="top-bar p-3">
-					<h4><strong>Dashboard</strong> Order Details</h4> 
-					</div>	
-					
+					<h4><strong>Order Details</strong> </h4>
+					</div>
+
 					<div class="row">
 						<div class="col-md-9 my-auto">
 							<form role="search" method="GET" action="">
 								<div class="input-group">
-									
+
 									<input type="search" name="search" placeholder="Search name/email/phone/order" class="form-control" value="{{ $searchQuery }}">
 									<select name="searchbyprogress" class="form-control">
 										<option value="">Search by Progress</option>
@@ -27,10 +27,10 @@ use Carbon\Carbon;
 									@endif
 								</div>
 							</form>
-							
+
 						</div>
 					</div>
-					
+
 					<div class="card-body">
                             <div class="border p-4 rounded">
                             <div class="table-responsive">
@@ -62,28 +62,28 @@ use Carbon\Carbon;
 											<button value = "{{ $order->id }}" class="btn btn-sm btn-warning btn-order-process">Prosessing</button>
 											@else
 											<a href="" class="btn btn-sm btn-success">Accept</a>
-											@endif		
+											@endif
 										</td>
-										
-                                        
+
+
 										<td>
 												<a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 align-middle"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
 												<a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash align-middle"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
-										</td>	
+										</td>
 									</tr>
 								@endforeach
 								</tbody>
-                                
+
 								</table>
-								
+
 							</div>
 						</div>
 					</div>
 					{{ $orders->appends(request()->except('page'))->links() }}
-					
+
 				</div>
 				</div>
-		
+
 @endsection
 @section('js')
 <!-- jQuery for accept order -->
@@ -141,15 +141,15 @@ use Carbon\Carbon;
 					//show();
 
 					// Add event listeners for dynamic buttons
-					
+
 					});
-					
-			
+
+
 		</script>
 
 			<!-- Date range picker -->
 			<script>
-				
+
 					$(function() {
 						$('input[name="daterange"]').daterangepicker({
 							opens: 'left',
@@ -170,5 +170,5 @@ use Carbon\Carbon;
 							$(this).val('');
 						});
 					});
-			</script>	
+			</script>
 @endsection

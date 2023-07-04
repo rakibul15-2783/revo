@@ -3,15 +3,15 @@
 @section('main-content')
 
 
-                  
+
 <div class="top-bar p-3">
-					<h4><strong>Dashboard</strong> Make Order</h4>
-					</div>	
+					<h4><strong>Make Order</strong> </h4>
+					</div>
 
 					<div class="col-xl-6 mx-auto p-4">
 							<div class="card-body">
 								<div class="border p-4 rounded">
-								
+
 
 									<!-- make order for user from admin panel -->
                                     <form action="{{ route('makeordersuccess') }}" method="POST">
@@ -19,16 +19,16 @@
 									<div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Username</label>
 										<div class="col-sm-9">
-										
+
 										<select class="select-user-for-order form-control" name="username">
 										<option value="">Select User</option>
 											 @foreach($users as $user)
-												
+
 												<option value="{{$user->username}}">{{$user->username}}</option>
 												@endforeach
 										</select>
                                         </div>
-                                        
+
 									</div>
 									<div class="row mb-3">
 										<label for="date" class=" col-sm-3 col-form-label">Date </label>
@@ -38,7 +38,7 @@
                                               <span class="text-danger">{{ $message }}</span>
                                              @enderror
                                         </div>
-                                        
+
 									</div>
 
 									<div class="row mb-3">
@@ -54,7 +54,7 @@
 										<label class="col-sm-3 col-form-label"></label>
 										<div class="col-sm-9">
 											<button type="submit" name="submit" onclick="return dayoff();" class="submit btn btn-info px-5">Submit Order</button>
-											
+
 										</div>
 									</div>
                                     </form>
@@ -67,14 +67,14 @@
 								</div>
 							</div>
 						</div>
-		
+
 
 @endsection
 
 @section('js')
 
 	<!-- select 2 -->
-			
+
 						<script>
 							$(document).ready(function() {
 								$('.select-user-for-order').select2();
@@ -82,14 +82,14 @@
 
 							console.log($('.select-user-for-order'))
 						</script>
-						
+
  <!-- don't make todays order when it past 5.00 pm and previous days -->
 <script>
 	var date = new Date;
 	var tDate = date.getDate();
 	var month = date.getMonth() + 1;
 	var currentHour = date.getHours();
-	
+
 	//do not make order in friday, saturday and sunday
     function dayoff() {
 		var dateInput = document.getElementById("date");
@@ -132,6 +132,6 @@
 			var minDate = year + "-" + month + "-" + tDate;
 			document.getElementById("date").setAttribute('min', minDate);
 	}
-	
+
 </script>
 @endsection

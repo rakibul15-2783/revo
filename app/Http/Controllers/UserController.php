@@ -78,7 +78,7 @@ class UserController extends Controller
             event(new Registered($user));
 
             Auth::login($user);
-            return redirect('/mainpage');
+            return redirect('/dashboard');
         }
         else{
             $user = new User();
@@ -90,13 +90,13 @@ class UserController extends Controller
             $mail = $user->email;
             $sendMail = new EmailSendJob($mail);
             dispatch($sendMail);
-            
+
             event(new Registered($user));
 
             Auth::login($user);
-            return redirect('/mainpage');
+            return redirect('/dashboard');
         }
-        
+
 
     }
 
@@ -108,29 +108,29 @@ class UserController extends Controller
         $fbUser = Socialite::driver('facebook')->stateless()->user();
         $user = User::where('f_id', $fbUser->id)->first();
         //dd($fbUser);
-        
+
         if($user){
             event(new Registered($user));
 
             Auth::login($user);
-            return redirect('/mainpage');
+            return redirect('/dashboard');
         }
         else{
             $user = new User();
             $user->name = $fbUser->name;
             $user->f_id = $fbUser->id;
             $user->save();
-            
+
             event(new Registered($user));
 
             Auth::login($user);
-            return redirect('/mainpage');
+            return redirect('/dashboard');
         }
-        
-        
+
+
 
     }
-    
+
 
          //user login
     public function login()
@@ -149,7 +149,7 @@ class UserController extends Controller
 
         if(Auth::attempt($credentials)) {
 
-            return redirect()->intended('mainpage');
+            return redirect()->intended('dashboard');
         }
 
 
@@ -157,10 +157,10 @@ class UserController extends Controller
 
     }
 
-    public function mainpage()
+    public function dashboard()
     {
 
-        return view('mainpage');
+        return view('dashboard');
     }
 
 
