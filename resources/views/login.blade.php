@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{{ asset('admin') }}/assets/img/favicon.ico" />
-    <title>Revo Admin &amp; Dashboard Template</title>
+    <title>Meal System Login</title>
     <link href="{{ asset('admin') }}/assets/css/app.css" rel="stylesheet">
 </head>
 

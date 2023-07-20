@@ -31,8 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'google' => [
-        'client_id' => '684623105804-308j93qjnmig2unbv9bgkig09j1ohqba.apps.googleusercontent.com',
-        'client_secret' => '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',
+        'client_id' => '724088211287-nucoodim4a1mp5507eucrela077pt763.apps.googleusercontent.com',
+        'client_secret' => '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',
         'redirect' => 'http://127.0.0.1:8000/google/signup',
     ],
     'facebook' => [

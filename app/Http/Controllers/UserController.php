@@ -70,7 +70,7 @@ class UserController extends Controller
         return Socialite::driver('google')->redirect();
     }
     public function googlesignup(){
-        $socialUser = Socialite::driver('google')->user();
+        $socialUser = Socialite::driver('google')->stateless()->user();
         $user = User::where('email', $socialUser->email)->first();
         //dd($socialUser);
 
