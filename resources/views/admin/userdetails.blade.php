@@ -2,7 +2,7 @@
 @extends('admin.includes.master')
 @section('main-content')  
 				<div class="top-bar p-3">
-				<h4><strong>Dashboard</strong> User Details</h>
+				<h4><strong>Dashboard</strong> User Details</h4>
 				</div>		 
 				<!-- for name and email searching -->
 				<div class="row">

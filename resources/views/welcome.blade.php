@@ -12,9 +12,9 @@
 </head>
 <body>
     <div class="auth-wrapper w-100 vh-100">
-        <div class="container vh-100">
+        <div class="container-fluid vh-100">
             <div class="row justify-content-center align-items-center h-100">
-                <div class="col-lg-12 border m-4 p-4 text-center">
+                <div class="col-lg-6  border m-4 p-4 text-center">
                     <h3 class="text-success">Welcome to meal system</h3>
                     <a href="{{ route('login') }}" class="btn btn-sm btn-info">Login</a>
                      <a href="{{ route('register') }}" class="btn btn-sm btn-warning">Register</a>
