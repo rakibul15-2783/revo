@@ -50,18 +50,17 @@
                                                     </span>
                                             </label>
                                         </div>
-                                        <div class="mt-3">
-                                            <button type="submit" class="btn btn-lg btn-warning w-50 mr-2 border-warning">Sign In</button>
-                                            <a href="{{ route('register') }}" class="btn btn-lg border-white text-white w-40">Sign Up</a>
+                                        <div class="d-flex justify-content-center m-3">
+                                            <button type="submit" class="btn btn-lg btn-success mx-3 ">Sign In</button>
+                                            <a href="{{ route('register') }}" class="btn btn-warning btn-lg">Sign Up</a>
                                         </div>
-                                        <div class="mt-3 text-center">
-                                            <a href="{{ route('google') }}" class="btn btn-lg border-white text-white w-40">Sign in with Google</a>
-                                            <a href="{{ route('facebook') }}" class="btn btn-lg border-white text-white w-40">Sign in with Facebook</a>
+                                        <div class="d-flex justify-content-center m-3">
+                                            <a href="{{ route('google') }}" class="text-white mx-2">Sign in with Google</a>
+                                            <a href="{{ route('facebook') }}" class="text-white mx-2">Sign in with Facebook</a>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-lg-6">
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

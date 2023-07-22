@@ -34,12 +34,18 @@
         <div class="col-xl-9 mx-auto">
             <div class="card">
                 <div class="card-body">
+                    
                     <div class="text-center">
+                        
                         <h2 class="welcome-message">Welcome, {{ Auth::user()->name }}</h2>
                         <div class="action-buttons">
                             <a href="{{ route('order') }}" class="btn btn-primary">Order Now</a>
                             <a href="{{ route('seeorder') }}" class="btn btn-success">See Orders</a>
                             <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+                            @if(Auth::user()->role == 0 || Auth::user()->role == 2)
+                                <a href='{{ route("adminprofile") }}' class="btn btn-warning">Admin Dashboard</a>
+                            @endif
+
                         </div>
                     </div>
                 </div>

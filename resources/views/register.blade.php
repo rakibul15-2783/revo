@@ -28,27 +28,27 @@
                                         <form action="{{ route('insesrtuser') }}" method="POST">
                                             @csrf
                                             <div class="mb-3">
-                                                <input class="form-control form-control-lg" type="text" id="name" value="{{ old('name') }}" name="name" placeholder="Enter your full name"> @error('name')
+                                                <input class="form-control form-control-lg" type="text" id="name" value="{{ old('name') }}" required name="name" placeholder="Enter your full name"> @error('name')
                                                 <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <input class="form-control form-control-lg" type="text" id="username" value="{{ old('username') }}" name="username" placeholder="Enter your username "> @error('username')
+                                                <input class="form-control form-control-lg" type="text" id="username" value="{{ old('username') }}" required name="username" placeholder="Enter your username "> @error('username')
                                                 <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <input class="form-control form-control-lg" type="email" value="{{ old('email') }}" name="email" placeholder="Enter your email"> @error('email')
+                                                <input class="form-control form-control-lg" type="email" value="{{ old('email') }}" name="email" required placeholder="Enter your email"> @error('email')
                                                 <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <input class="form-control form-control-lg" type="phone" value="{{ old('phone') }}" name="phone" pattern="[0-9]{11}" required value="{{ old('phone') }}" placeholder="Enter your Phone Number"> @error('phone')
+                                                <input class="form-control form-control-lg" type="phone" value="{{ old('phone') }}" name="phone" pattern="[0-9]{11}"  value="{{ old('phone') }}" placeholder="Enter your Phone Number"> @error('phone')
                                                 <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password"> @error('password')
+                                                <input class="form-control form-control-lg" type="password" name="password" required placeholder="Enter your password"> @error('password')
                                                 <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="mb-3">
-                                                <input class="form-control form-control-lg" type="password" name="password_confirmation" placeholder="Confirm password">
+                                                <input class="form-control form-control-lg" type="password" required name="password_confirmation" placeholder="Confirm password">
                                             </div>
                                            
                                             <div class="row justify-content-center">

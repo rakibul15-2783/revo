@@ -26,109 +26,103 @@
 </div>
 
 
-@if(Auth::user()->role==0)
-				<div class="card-body">
+    @if(Auth::user()->role==0)
+                    <div class="table-responsive card-body">
+                               
+                        <div class="table-responsive">
+                                <table id="example" class="table  table-striped table-bordered table-hover" >
+                                        <!-- Super admin can change role -->
+
+
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:25%;">Name</th>
+                                                    <th style="width:10%;">Username</th>
+                                                    <th style="width:20%;">Email</th>
+                                                    <th style="width:20%;">Phone</th>
+                                                    <th style="width:10%;">Role</th>
+                                                    <th style="width:30%;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="userdetails">
+
+                                            @foreach($users as $user)
+                                            <tr>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->username }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->phone }}</td>
+                                                <td>
+                                                    @if($user->role == 1)
+                                                    <button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-user-role">User</button>
+                                                    @elseif($user->role == 0)
+                                                    <span class="badge badge-success">Super Admin</span>
+                                                    @else
+                                                    <button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-admin-role">Admin</button>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($user->role==0)
+                                                    <span class="badge badge-success" >No Action</span>
+                                                    @else
+                                                    <button  value = "{{$user->id}}" class="btn btn-sm btn-info">Edit</button>
+                                                    <button  value = "{{$user->id}}" class="btn btn-sm btn-danger btn-user-delete">Delete</button>
+                                                    @endif
+
+
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            </tbody>
+                                    </div>
+                                </table>
+
+
+                                    {{ $users->links() }}
+                     
+    @else
+                        <!-- Admin can't change role -->
+                        <div class="table-responsive card-body">
                             <div class="border p-4 rounded">
-				<div class="table-responsive">
-							<table id="example" class="table table-striped table-bordered" style="width:100%">
-							<div class="card">
-
-								<table class="table table-striped">
-
-							<!-- Super admin can change role -->
-
-
-									<thead>
-										<tr>
-											<th style="width:25%;">Name</th>
-											<th style="width:10%;">Username</th>
-											<th style="width:20%;">Email</th>
-											<th style="width:20%;">Phone</th>
-											<th style="width:10%;">Role</th>
-											<th style="width:30%;">Action</th>
-										</tr>
-									</thead>
-								<tbody class="userdetails">
-
-									@foreach($users as $user)
-									<tr>
-										<td>{{ $user->name }}</td>
-										<td>{{ $user->username }}</td>
-										<td>{{ $user->email }}</td>
-										<td>{{ $user->phone }}</td>
-										<td>
-											@if($user->role == 1)
-											<button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-user-role">User</button>
-											@elseif($user->role == 0)
-											<span class="badge badge-success">Super Admin</span>
-											@else
-											<button href="#" value = "{{$user->id}}" class="btn btn-sm btn-info btn-admin-role">Admin</button>
-											@endif
-                                        </td>
-										<td>
-										    @if($user->role==0)
-											<span class="badge badge-success" >No Action</span>
-											@else
-											<button  value = "{{$user->id}}" class="btn btn-sm btn-info">Edit</button>
-											<button  value = "{{$user->id}}" class="btn btn-sm btn-danger btn-user-delete">Delete</button>
-											@endif
-
-
-										</td>
-									</tr>
-									@endforeach
-								</tbody>
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                        <div class="card">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Username</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Role</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($users as $user)
+                                                        <tr>
+                                                            <td>{{ $user->name }}</td>
+                                                            <td>{{ $user->username }}</td>
+                                                            <td>{{ $user->email }}</td>
+                                                            <td>{{ $user->phone }}</td>
+                                                            <td>
+                                                                @if($user->role == 1)
+                                                                    <span class="badge badge-warning">User</span>
+                                                                @elseif($user->role == 0)
+                                                                    <span class="badge badge-danger">Super Admin</span>
+                                                                @else
+                                                                    <span class="badge badge-success">Admin</span>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>  
+                                        </div>
+                                    </table>
+                                    {{ $users->links() }}
                                 </div>
-								</table>
-
-
-								</div>
-								</div>
-								{{ $users->links() }}
-								</div>
-                                @else
-        <!-- Admin can't change role -->
-        <div class="card-body">
-            <div class="border p-4 rounded">
-                <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <div class="card">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Username</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Role</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($users as $user)
-                                        <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->username }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->phone }}</td>
-                                            <td>
-                                                @if($user->role == 1)
-                                                    <span class="badge badge-warning">User</span>
-                                                @elseif($user->role == 0)
-                                                    <span class="badge badge-danger">Super Admin</span>
-                                                @else
-                                                    <span class="badge badge-success">Admin</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            </div>
                         </div>
-                    </table>
-                </div>
-            </div>
-        </div>
-
+                    </div>
     @endif
 
 @endsection
